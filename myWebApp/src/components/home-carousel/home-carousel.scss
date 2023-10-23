@@ -18,6 +18,132 @@
   transition: opacity ease-in-out 0.8s;
 }
 
+.slide-1 {
+  background-image: url("../../assets/home-images/nier-automata-bg.jpg");
+}
+
+.slide-2 {
+  background-image: url("../../assets/home-images/devil-bg.jpg");
+}
+
+.slide-3 {
+  background-image: url("../../assets/home-images/last-bg.jpg");
+}
+
 .active {
   opacity: 1;
+}
+
+.btn-slide {
+  width: 42px;
+  height: 42px;
+  font-size: 1.625rem;
+  z-index: 6;
+  border: none;
+  border-radius: 6px;
+  color: var(--white);
+  background-color: var(--black);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.btn-slide:hover {
+  opacity: 1;
+}
+
+.prev {
+  top: 50%;
+  left: -42px;
+  transform: translateY(-60%);
+  transition: all 0.3s ease-in-out;
+}
+.next {
+  top: 50%;
+  right: -42px;
+  transform: translateY(-60%);
+  transition: all 0.3s ease-in-out;
+}
+
+.home-carousel:hover > .prev {
+  left: 20px;
+}
+
+.home-carousel:hover > .next {
+  right: 20px;
+}
+
+.container-dots {
+  position: absolute;
+  z-index: 6;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+.sliderDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--gray-300);
+  margin: 0 5px;
+
+  cursor: pointer;
+}
+.sliderDot.active-dot {
+  background: var(--secondary-color);
+}
+
+@media (max-width: 1200px) {
+  .home-carousel {
+    min-height: 80vh;
+    max-height: 80vh;
+  }
+
+  .container-dots {
+    display: flex;
+  }
+}
+
+@media (max-width: 1050px) {
+  .home-carousel {
+    min-height: 65vh;
+    max-height: 65vh;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-carousel {
+    min-height: 50vh;
+    max-height: 50vh;
+  }
+
+  .btn-slide {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .home-carousel {
+    min-height: 80vh;
+    max-height: 80vh;
+  }
+
+  .slide-1 {
+    background-image: url("../../assets/home-images/nier-mobile-bg.jpg");
+  }
+
+  .slide-2 {
+    background-image: url("../../assets/home-images/devil-mobile-bg.jpg");
+  }
+
+  .slide-3 {
+    background-image: url("../../assets/home-images/last-mobile-bg.jpg");
+  }
+}
+
+@media (max-width: 320px) {
 }
