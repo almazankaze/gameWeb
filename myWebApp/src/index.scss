@@ -1,6 +1,9 @@
 :root {
-  --main-color: #005ecb;
-  --secondary-color: green;
+  --main-color: #000;
+  --secondary-color: #222;
+  --third-color: #f9aa01;
+  --main-color-light: #3670ce;
+  --cart-btn: #ffe000;
   --white: #fff;
   --gray-100: #f8f9fa;
   --gray-200: #e9ecef;
@@ -15,4 +18,5 @@
 }
 
 body {
+  background-color: var(--main-color);
 }

@@ -1,0 +1,43 @@
+.fog-anim {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: url("../../assets/home-images/clouds.png") repeat-x;
+  background-size: 200% auto;
+  background-position: 0 bottom;
+}
+
+.fog-layer-1 {
+  z-index: 3;
+  opacity: 0.18;
+  animation: fogAnim 20s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.fog-layer-2 {
+  z-index: 2;
+  opacity: 0.15;
+  animation: fogAnim 50s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.fog-layer-3 {
+  z-index: 1;
+  opacity: 0.1;
+  animation: fogAnim 70s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fogAnim {
+  0% {
+    background-position: -200% bottom;
+  }
+  100% {
+    background-position: 0% bottom;
+  }
+}

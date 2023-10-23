@@ -1,9 +1,12 @@
-import "./index.css";
+import Button from "./components/button/Button";
+import HomeCarousel from "./components/home-carousel/HomeCarousel";
+
+import "./index.scss";
 
 function App() {
   return (
     <>
-      <h1>Hello</h1>
+      <HomeCarousel />
     </>
   );
 }
