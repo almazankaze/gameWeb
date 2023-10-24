@@ -19,3 +19,32 @@
 body {
   background-color: var(--main-color);
 }
+
+h1 {
+  font-size: 4rem;
+}
+
+.container {
+  width: 92%;
+  max-width: 1280px;
+  margin: auto;
+}
+
+.text-shadow {
+  font-weight: 700;
+  text-shadow: 2px -2px 2px #fff;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+}
+
+@media (max-width: 900px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+}

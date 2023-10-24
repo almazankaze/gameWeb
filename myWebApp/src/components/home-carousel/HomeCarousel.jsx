@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-
+import Button from "../button/Button";
+import Sticker from "../sticker/Sticker";
 import FogAnim from "../fog-anim/FogAnim";
 
 import "./home-carousel.scss";
@@ -71,17 +72,41 @@ const HomeCarousel = () => {
         className={activeImg === 1 ? "slide slide-1 active" : "slide slide-1"}
         role="img"
         aria-label="Nier:Automata"
-      ></div>
+      >
+        <div className="container">
+          <div className="slide-content">
+            <Sticker title={"Available Now"} />
+            <h1 className="text-shadow">NieR:Automata</h1>
+            <Button type="button">Get Now</Button>
+          </div>
+        </div>
+      </div>
       <div
         className={activeImg === 2 ? "slide slide-2 active" : "slide slide-2"}
         role="img"
         aria-label="Devil May Cry 5"
-      ></div>
+      >
+        <div className="container">
+          <div className="slide-content">
+            <Sticker title={"Available On PS5"} />
+            <h1 className="text-shadow">Devil May Cry 5</h1>
+            <Button type="button">Get Now</Button>
+          </div>
+        </div>
+      </div>
       <div
         className={activeImg === 3 ? "slide slide-3 active" : "slide slide-3"}
         role="img"
         aria-label="The Last Of Us Part 2"
-      ></div>
+      >
+        <div className="container">
+          <div className="slide-content">
+            <Sticker title={"Top Rated"} />
+            <h1 className="text-shadow">The Last Of Us Part 2</h1>
+            <Button type="button">Get Now</Button>
+          </div>
+        </div>
+      </div>
 
       <button type="button" className="btn-slide next" onClick={nextSlide}>
         &#10095;

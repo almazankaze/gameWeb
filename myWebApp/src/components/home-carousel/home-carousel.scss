@@ -34,6 +34,20 @@
   opacity: 1;
 }
 
+.slide > .container {
+  z-index: 6;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 60%;
+  color: var(--white);
+}
+
 .btn-slide {
   width: 42px;
   height: 42px;
@@ -130,6 +144,10 @@
   .home-carousel {
     min-height: 80vh;
     max-height: 80vh;
+  }
+
+  .slide-content {
+    width: 100%;
   }
 
   .slide-1 {

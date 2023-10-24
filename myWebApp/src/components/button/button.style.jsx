@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BaseButton = styled.button`
-  background-color: var(--main-color);
+  background-color: var(--secondary-color);
   color: var(--white);
   min-width: 110px;
   text-align: center;
@@ -11,13 +11,13 @@ export const BaseButton = styled.button`
   transition: all 0.3s linear;
   font-size: 1rem;
   font-weight: 700;
-  border: 1px solid var(--main-color);
+  border: 1px solid var(--secondary-color);
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   &:hover {
-    background-color: var(--main-color-light);
-    border: 1px solid var(--main-color-light);
+    background-color: var(--white);
+    color: var(--secondary-color);
   }
 
   &.full-btn {
