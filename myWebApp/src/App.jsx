@@ -1,11 +1,15 @@
-import HomeCarousel from "./components/home-carousel/HomeCarousel";
+import Home from "./routes/home/Home";
+import Footer from "./components/footer/Footer";
+import ScrollUp from "./components/scrollup/ScrollUp";
 
 import "./index.scss";
 
 function App() {
   return (
     <>
-      <HomeCarousel />
+      <Home />
+      <Footer />
+      <ScrollUp />
     </>
   );
 }

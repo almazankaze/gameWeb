@@ -76,7 +76,7 @@ const HomeCarousel = () => {
         id={1}
         title="NieR:Automata"
         backgrounds={[banner1, banner1_mobile]}
-        stickerMess="Get Now"
+        stickerMess="Out Now"
         active={activeImg}
       />
       <Slide

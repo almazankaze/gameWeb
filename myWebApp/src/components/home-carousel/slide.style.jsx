@@ -10,9 +10,11 @@ export const SlideContainer = styled.div`
   background-position: center;
   position: absolute;
   opacity: 0;
-  transition: opacity ease-in-out 0.8s;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in, visibility 0.5s ease-in;
   &.active {
     opacity: 1;
+    visibility: visible;
   }
   > .container {
     z-index: 6;
