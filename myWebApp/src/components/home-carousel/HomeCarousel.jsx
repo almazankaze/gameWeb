@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
-import Button from "../button/Button";
-import Sticker from "../sticker/Sticker";
+import Slide from "./Slide";
 import FogAnim from "../fog-anim/FogAnim";
+
+import banner1 from "../../assets/home-images/nier-automata-bg.jpg";
+import banner1_mobile from "../../assets/home-images/nier-mobile-bg.jpg";
+import banner2 from "../../assets/home-images/devil-bg.jpg";
+import banner2_mobile from "../../assets/home-images/devil-mobile-bg.jpg";
+import banner3 from "../../assets/home-images/last-bg.jpg";
+import banner3_mobile from "../../assets/home-images/last-mobile-bg.jpg";
 
 import "./home-carousel.scss";
 
@@ -51,12 +57,10 @@ const HomeCarousel = () => {
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-    if (isLeftSwipe || isRightSwipe)
-      console.log("swipe", isLeftSwipe ? "left" : "right");
 
     if (isLeftSwipe) {
       nextSlide();
-    } else {
+    } else if (isRightSwipe) {
       prevSlide();
     }
   };
@@ -68,45 +72,27 @@ const HomeCarousel = () => {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <div
-        className={activeImg === 1 ? "slide slide-1 active" : "slide slide-1"}
-        role="img"
-        aria-label="Nier:Automata"
-      >
-        <div className="container">
-          <div className="slide-content">
-            <Sticker title={"Available Now"} />
-            <h1 className="text-shadow">NieR:Automata</h1>
-            <Button type="button">Get Now</Button>
-          </div>
-        </div>
-      </div>
-      <div
-        className={activeImg === 2 ? "slide slide-2 active" : "slide slide-2"}
-        role="img"
-        aria-label="Devil May Cry 5"
-      >
-        <div className="container">
-          <div className="slide-content">
-            <Sticker title={"Available On PS5"} />
-            <h1 className="text-shadow">Devil May Cry 5</h1>
-            <Button type="button">Get Now</Button>
-          </div>
-        </div>
-      </div>
-      <div
-        className={activeImg === 3 ? "slide slide-3 active" : "slide slide-3"}
-        role="img"
-        aria-label="The Last Of Us Part 2"
-      >
-        <div className="container">
-          <div className="slide-content">
-            <Sticker title={"Top Rated"} />
-            <h1 className="text-shadow">The Last Of Us Part 2</h1>
-            <Button type="button">Get Now</Button>
-          </div>
-        </div>
-      </div>
+      <Slide
+        id={1}
+        title="NieR:Automata"
+        backgrounds={[banner1, banner1_mobile]}
+        stickerMess="Get Now"
+        active={activeImg}
+      />
+      <Slide
+        id={2}
+        title="Devil May Cry 5"
+        backgrounds={[banner2, banner2_mobile]}
+        stickerMess="Now On PS5"
+        active={activeImg}
+      />
+      <Slide
+        id={3}
+        title="The Last Of Us Part 2"
+        backgrounds={[banner3, banner3_mobile]}
+        stickerMess="Top Rated"
+        active={activeImg}
+      />
 
       <button type="button" className="btn-slide next" onClick={nextSlide}>
         &#10095;

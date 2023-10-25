@@ -6,12 +6,13 @@ export const BaseButton = styled.button`
   min-width: 110px;
   text-align: center;
   padding: 0.5em;
-  margin: 0.75rem 0;
+  margin: 0;
   display: inline-block;
   transition: all 0.3s linear;
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 700;
-  border: 1px solid var(--secondary-color);
+  text-transform: uppercase;
+  border: none;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
@@ -30,7 +31,7 @@ export const BaseButton = styled.button`
   }
 
   @media (max-width: 600px) {
-    font-size: 0.75rem;
+    font-size: 1rem;
     min-width: 80px;
   }
 `;

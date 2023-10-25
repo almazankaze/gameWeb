@@ -6,48 +6,6 @@
   max-height: 95vh;
 }
 
-.slide {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background-size: 100% 100%;
-  background-position: center;
-  opacity: 0;
-  position: absolute;
-  transition: opacity ease-in-out 0.8s;
-}
-
-.slide-1 {
-  background-image: url("../../assets/home-images/nier-automata-bg.jpg");
-}
-
-.slide-2 {
-  background-image: url("../../assets/home-images/devil-bg.jpg");
-}
-
-.slide-3 {
-  background-image: url("../../assets/home-images/last-bg.jpg");
-}
-
-.active {
-  opacity: 1;
-}
-
-.slide > .container {
-  z-index: 6;
-}
-
-.slide-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  width: 60%;
-  color: var(--white);
-}
-
 .btn-slide {
   width: 42px;
   height: 42px;
@@ -145,23 +103,4 @@
     min-height: 80vh;
     max-height: 80vh;
   }
-
-  .slide-content {
-    width: 100%;
-  }
-
-  .slide-1 {
-    background-image: url("../../assets/home-images/nier-mobile-bg.jpg");
-  }
-
-  .slide-2 {
-    background-image: url("../../assets/home-images/devil-mobile-bg.jpg");
-  }
-
-  .slide-3 {
-    background-image: url("../../assets/home-images/last-mobile-bg.jpg");
-  }
-}
-
-@media (max-width: 320px) {
 }
