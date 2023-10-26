@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,7 @@ import {
   setIsSearchOpen,
 } from "../../store/navbar/navbar-actions";
 
+import MenuIcon from "@mui/icons-material/Menu";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -18,11 +19,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 import "./navigation.scss";
+import SideBar from "./SideBar";
 
 const Navigation = () => {
   const dispatch = useDispatch();
   const isMenuOpen = useSelector(selectIsMenuOpen);
   const isSearchOpen = useSelector(selectIsSearchOpen);
+  const [isTopPage, setIsTopPage] = useState(true);
 
   const cartCount = 8;
 
@@ -37,9 +40,21 @@ const Navigation = () => {
     dispatch(setIsMenuOpen(false));
     dispatch(setIsSearchOpen(!isSearchOpen));
   };
+
+  useEffect(() => {
+    const handleNavIsTop = () => {
+      window.pageYOffset > 10 ? setIsTopPage(false) : setIsTopPage(true);
+    };
+
+    window.addEventListener("scroll", handleNavIsTop);
+
+    return () => {
+      window.removeEventListener("scroll", handleNavIsTop);
+    };
+  }, []);
   return (
     <Fragment>
-      <div className="navbar">
+      <div className={isTopPage ? "navbar" : "navbar navbar-scrolling"}>
         <div className="navbar-left">
           <Link to="/" className="navbar-logo-container">
             <SportsEsportsIcon className="navbar-logo" />
@@ -54,37 +69,31 @@ const Navigation = () => {
               <ul className="dropdown-menu">
                 <li className="sidemenu">
                   <Link className="sub-link" to="/components">
-                    <div className="dot"></div>Pc components
+                    <div className="dot"></div>Consoles
                   </Link>
                   <PlayArrowIcon className="nav-arrow-icon" />
 
                   <div className="menu-right">
-                    <h1>Pc Components</h1>
+                    <h1>Consoles</h1>
                     <hr></hr>
                     <div className="menu-grid">
                       <div className="menu-grid-item">
-                        <p>Motherboards</p>
+                        <p>Nintendo Switch</p>
                       </div>
                       <div className="menu-grid-item">
-                        <p>Processors</p>
+                        <p>Xbox Series X</p>
                       </div>
                       <div className="menu-grid-item">
-                        <p>RAM</p>
+                        <p>Playstation 5</p>
                       </div>
                       <div className="menu-grid-item">
-                        <p>Video Cards</p>
+                        <p>Handhelds</p>
                       </div>
                       <div className="menu-grid-item">
-                        <p>Power Supplys</p>
+                        <p>PC</p>
                       </div>
                       <div className="menu-grid-item">
-                        <p>Hard Drives</p>
-                      </div>
-                      <div className="menu-grid-item">
-                        <p>SSD</p>
-                      </div>
-                      <div className="menu-grid-item">
-                        <p>Cases</p>
+                        <p>Retro</p>
                       </div>
                     </div>
                   </div>
@@ -100,28 +109,17 @@ const Navigation = () => {
                     <div className="dot"></div>Monitors
                   </Link>
                 </li>
-                <li>
-                  <Link className="sub-link" to="/about">
-                    <div className="dot"></div>Printers
-                  </Link>
-                </li>
-                <li className="sidemenu">
-                  <Link className="sub-link" to="/about">
-                    <div className="dot"></div>Gaming
-                  </Link>
-                  <PlayArrowIcon className="nav-arrow-icon" />
-                </li>
-                <li>
-                  <Link className="sub-link" to="/about">
-                    <div className="dot"></div>Tablets
-                  </Link>
-                </li>
 
                 <li className="sidemenu">
                   <Link className="sub-link" to="/about">
-                    <div className="dot"></div>Software
+                    <div className="dot"></div>Games
                   </Link>
                   <PlayArrowIcon className="nav-arrow-icon" />
+                </li>
+                <li>
+                  <Link className="sub-link" to="/about">
+                    <div className="dot"></div>Digital Codes
+                  </Link>
                 </li>
               </ul>
             </li>
@@ -131,18 +129,18 @@ const Navigation = () => {
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/desktops">
-                Desktops
+              <Link className="nav-link" to="/categories">
+                Categories
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/notebooks">
-                Notebooks
+              <Link className="nav-link" to="/top-deals">
+                Top Deals
               </Link>
             </li>
             <li>
-              <Link className="nav-link" to="/smartphones">
-                Smartphones
+              <Link className="nav-link" to="/news">
+                News
               </Link>
             </li>
             <li>
@@ -171,7 +169,11 @@ const Navigation = () => {
             </Link>
           </div>
         </div>
+        <div className="mobile-nav-right">
+          <MenuIcon className="navbar-icon" onClick={toggleIsMenuOpen} />
+        </div>
       </div>
+      <SideBar />
       <Outlet />
     </Fragment>
   );

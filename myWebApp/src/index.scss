@@ -11,7 +11,7 @@
   --gray-600: #868e96;
   --gray-700: #495057;
   --gray-800: #343a40;
-  --gray-900: #212529;
+  --gray-900: #191c1f;
   --black: #000;
 }
 
@@ -27,6 +27,12 @@ h1 {
   width: 92%;
   max-width: 1280px;
   margin: auto;
+}
+
+.align-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .text-shadow {

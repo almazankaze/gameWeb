@@ -1,5 +1,5 @@
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 998;
@@ -12,6 +12,12 @@
   width: 100%;
   height: 4.5rem;
   padding: 2rem 1.25rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.navbar-scrolling {
+  background-color: var(--third-color);
+  box-shadow: 0px 0px 3px 2px var(--secondary-color);
 }
 
 .navbar-logo-container {
@@ -78,8 +84,8 @@
 .dropdown-menu {
   list-style: none;
   position: absolute;
-  background-color: var(--white);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: var(--black);
+  box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
   width: 240px;
   padding: 0.5rem;
   top: 45px;
@@ -103,14 +109,14 @@
 }
 
 .dropdown-menu li:hover .sub-link {
-  color: var(--black);
+  color: var(--secondary-color);
 }
 
 .sub-link {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: var(--gray-800);
+  color: var(--white);
   font-size: 1rem;
   font-weight: 600;
 }
@@ -127,7 +133,7 @@
 
 .nav-arrow-icon {
   transform: scale(0.6);
-  color: var(--main-color);
+  color: var(--secondary-color);
   visibility: hidden;
 }
 
@@ -138,7 +144,7 @@
 .dot {
   height: 6px;
   width: 6px;
-  background-color: var(--main-color);
+  background-color: var(--secondary-color);
   border-radius: 50%;
   display: inline-block;
   margin-right: 0.5rem;
@@ -151,8 +157,8 @@
 
 .menu-right {
   position: absolute;
-  background-color: var(--white);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: var(--black);
+  box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
   width: max-content;
   top: 0;
   left: 130%;
@@ -164,14 +170,14 @@
 }
 
 .menu-right h1 {
-  color: var(--main-color);
+  color: var(--white);
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   font-size: 1.75rem;
 }
 
 .menu-right hr {
-  border: 1px solid var(--main-color);
+  border: 1px solid var(--secondary-color);
 }
 
 .sidemenu:hover .menu-right {
@@ -193,13 +199,12 @@
 }
 
 .menu-grid-item p {
-  color: var(--gray-800);
+  color: var(--white);
   transition: all 0.2s ease-in-out;
 }
 
 .menu-grid-item:hover p {
-  color: var(--black);
-  font-weight: bold;
+  color: var(--secondary-color);
 }
 
 .navbar-right {
@@ -250,6 +255,11 @@
   cursor: pointer;
 }
 
+.mobile-nav-right {
+  display: none;
+  color: var(--white);
+}
+
 @media (max-width: 1250px) {
   .navbar-middle {
     display: none;
@@ -257,6 +267,11 @@
 
   .navbar-right {
     display: none;
+  }
+
+  .mobile-nav-right {
+    display: flex;
+    z-index: 900;
   }
 }
 
