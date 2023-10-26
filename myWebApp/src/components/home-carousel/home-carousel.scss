@@ -10,11 +10,11 @@
   width: 42px;
   height: 42px;
   font-size: 1.625rem;
-  z-index: 6;
+  z-index: 4;
   border: none;
   border-radius: 6px;
   color: var(--white);
-  background-color: var(--black);
+  background-color: var(--secondary-color);
   position: absolute;
   display: flex;
   justify-content: center;
@@ -50,7 +50,7 @@
 
 .container-dots {
   position: absolute;
-  z-index: 6;
+  z-index: 4;
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);

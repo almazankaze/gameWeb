@@ -11,13 +11,15 @@ export const SlideContainer = styled.div`
   position: absolute;
   opacity: 0;
   visibility: hidden;
+
   transition: opacity 0.5s ease-in, visibility 0.5s ease-in;
   &.active {
     opacity: 1;
     visibility: visible;
   }
+
   > .container {
-    z-index: 6;
+    z-index: 4;
   }
 
   @media (max-width: 500px) {
@@ -30,7 +32,6 @@ export const SlideContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-
   width: 60%;
   color: var(--white);
 
