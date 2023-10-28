@@ -27,7 +27,7 @@
 }
 
 .footer-title {
-  color: var(--white);
+  color: var(--secondary-color);
   margin-bottom: 0.5rem;
 }
 
@@ -35,6 +35,7 @@
   margin-right: 0.8rem;
   transform: scale(1.5);
   margin-bottom: 0.5rem;
+  color: var(--secondary-color);
 }
 
 .footer-info-text {
@@ -70,7 +71,7 @@
 .footer-form {
   display: flex;
   align-items: center;
-  background-color: var(--gray-800);
+  background-color: var(--third-color);
   margin: 1rem 0;
 }
 
@@ -80,18 +81,18 @@
   padding: 1rem;
   background-color: transparent;
   font-size: 1rem;
-  color: var(--white);
+  color: var(--secondary-color);
 }
 
 .footer-form-icon {
   cursor: pointer;
   transform: scale(1.1);
-  color: var(--white);
+  color: var(--secondary-color);
   margin-right: 1.5rem;
 }
 
 .footer-input::placeholder {
-  color: var(--gray-600);
+  color: var(--secondary-color);
 }
 
 .footer-input:focus {

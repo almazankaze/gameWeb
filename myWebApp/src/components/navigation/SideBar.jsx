@@ -24,7 +24,6 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const [showHardware, setShowHardware] = useState(false);
   const [showPeripherals, setShowPeripherals] = useState(false);
-  const [showComputers, setShowComputers] = useState(false);
   const isMenuOpen = useSelector(selectIsMenuOpen);
   const cartCount = 9;
 
