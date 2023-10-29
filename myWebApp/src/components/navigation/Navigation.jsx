@@ -14,6 +14,8 @@ import {
 
 import SideBar from "./SideBar";
 import SearchForm from "../search-form/SearchForm";
+import DropDownContainer from "../drop-down/DropDownContainer";
+import DropDown, { DROPDOWN_TYPE_CLASSES } from "../drop-down/DropDown";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -138,9 +140,28 @@ const Navigation = () => {
                 </Link>
               </li>
               <li>
-                <Link className="nav-link" to="/categories">
-                  Categories
-                </Link>
+                <DropDownContainer>
+                  <div className="nav-link">Categories</div>
+                  <DropDown
+                    className="drop-down"
+                    dropdownType={DROPDOWN_TYPE_CLASSES.multicol}
+                    itemList={[
+                      "Action",
+                      "Arcade",
+                      "First-Person Shooter",
+                      "JRPG",
+                      "Strategy",
+                      "Hack and Slash",
+                      "Platformer",
+                      "Racing",
+                      "Sports",
+                      "Puzzle",
+                      "Dating",
+                      "Third-Person Shooter",
+                    ]}
+                    numCols={4}
+                  />
+                </DropDownContainer>
               </li>
               <li>
                 <Link className="nav-link" to="/top-deals">
