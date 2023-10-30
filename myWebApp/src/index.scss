@@ -17,6 +17,11 @@
 
 body {
   background-color: var(--main-color);
+  color: var(--white);
+}
+
+section {
+  padding: 6em 0;
 }
 
 h1 {
@@ -44,6 +49,40 @@ h1 {
 
 .nav-open-background {
   display: none;
+}
+
+.simple-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin-top: 1rem;
+}
+
+.simple-grid-card {
+  cursor: pointer;
+}
+
+.simple-grid-card > p {
+  font-size: 0.75rem;
+  margin: 1rem 0;
+}
+
+.simple-grid-card > h4 {
+  line-height: 1.5;
+  transition: color 0.3s ease-in-out;
+}
+
+.simple-grid-card:hover > h4 {
+  color: var(--secondary-color);
+}
+
+.card-image {
+  display: grid;
+  place-items: center;
+}
+
+.card-image img {
+  width: 100%;
 }
 
 @media (max-width: 1250px) {
