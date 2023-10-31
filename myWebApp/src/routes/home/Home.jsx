@@ -1,5 +1,6 @@
 import HomeCarousel from "../../components/home-carousel/HomeCarousel";
 import ConsoleSection from "./ConsoleSection";
+import HotDealsSection from "./HotDealsSection";
 import NewsSection from "./NewsSection";
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
     <>
       <HomeCarousel />
       <ConsoleSection />
+      <HotDealsSection />
       <NewsSection />
     </>
   );

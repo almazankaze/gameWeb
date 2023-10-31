@@ -17,4 +17,11 @@ export const SectionHeaderContainer = styled.div`
     overflow: visible;
     margin: 0;
   }
+
+  @media (max-width: 360px) {
+    > h1 {
+      font-size: 1.125rem;
+      text-underline-offset: 1.063rem;
+    }
+  }
 `;

@@ -28,6 +28,10 @@ h1 {
   font-size: 4rem;
 }
 
+.alt-bg-color {
+  background-color: var(--third-color);
+}
+
 .container {
   width: 92%;
   max-width: 1280px;
@@ -52,27 +56,81 @@ h1 {
 }
 
 .simple-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 1rem;
 }
 
+.simple-col-2 {
+  flex: 0 0 50%;
+  padding: 15px;
+}
+
+.simple-col-img {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  line-height: 0 !important;
+  background-color: var(--secondary-color);
+}
+
+.simple-col-img img {
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.simple-col-img:hover img {
+  opacity: 0.2;
+}
+
+.simple-img-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-weight: 700;
+  padding: 1.75rem;
+  opacity: 0;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.simple-img-text hr {
+  margin-top: 1rem;
+  border: none;
+  background: var(--white);
+  height: 2px;
+}
+
+.simple-col-img:hover .simple-img-text {
+  opacity: 1;
+}
+
+.simple-col-3 {
+  flex: 0 0 33.33%;
+  padding: 0 10px;
+}
+
 .simple-grid-card {
+  flex: 0 0 calc(33.33%);
+  padding: 0 20px;
+}
+
+.grid-card-content {
   cursor: pointer;
 }
 
-.simple-grid-card > p {
+.grid-card-content > p {
   font-size: 0.75rem;
   margin: 1rem 0;
 }
 
-.simple-grid-card > h4 {
+.grid-card-content > h4 {
   line-height: 1.5;
   transition: color 0.3s ease-in-out;
 }
 
-.simple-grid-card:hover > h4 {
+.grid-card-content:hover > h4 {
   color: var(--secondary-color);
 }
 
@@ -100,14 +158,55 @@ h1 {
   }
 }
 
+@media (max-width: 1025px) {
+  .simple-grid-card {
+    flex: 0 0 calc(50%);
+    margin: 10px 0;
+  }
+
+  .simple-col-3 {
+    flex: 0 0 50%;
+    padding: 15px;
+  }
+}
+
 @media (max-width: 900px) {
   h1 {
     font-size: 2.5rem;
   }
 }
 
+@media (max-width: 700px) {
+  .simple-grid-card {
+    flex: 0 0 calc(100%);
+    padding: 0 10px;
+    margin: 20px 0;
+  }
+
+  .simple-col-2 {
+    flex: 0 0 100%;
+    padding: 15px;
+  }
+
+  .simple-col-3 {
+    flex: 0 0 100%;
+    padding: 15px;
+  }
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .grid-card-content > p {
+    font-size: 0.688rem;
+    margin: 1rem 0;
+  }
+
+  .grid-card-content > h4 {
+    font-size: 0.875rem;
   }
 }
