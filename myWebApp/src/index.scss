@@ -77,11 +77,30 @@ h1 {
 
 .simple-col-img img {
   width: 100%;
+}
+
+.simple-col-img .img-fade {
   transition: all 0.3s ease-in-out;
 }
 
-.simple-col-img:hover img {
+.simple-col-img:hover .img-fade {
   opacity: 0.2;
+}
+
+.simple-col-img .img-expand {
+  transition: transform 0.4s linear;
+}
+
+.simple-col-img:hover .img-expand {
+  transform: scale(1.2);
+}
+
+.hover-border {
+  transition: all 0.4s linear;
+}
+
+.hover-border:hover {
+  box-shadow: 0px 0px 3px 2px var(--secondary-color);
 }
 
 .simple-img-text {
@@ -104,6 +123,20 @@ h1 {
 
 .simple-col-img:hover .simple-img-text {
   opacity: 1;
+}
+
+.complex-img-text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5rem 3rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.complex-img-text h2 {
+  font-size: 2rem;
+  margin-top: 2.5rem;
 }
 
 .simple-col-3 {
@@ -156,12 +189,21 @@ h1 {
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
   }
+
+  .complex-img-text h2 {
+    font-size: 1.75rem;
+  }
 }
 
 @media (max-width: 1025px) {
   .simple-grid-card {
     flex: 0 0 calc(50%);
     margin: 10px 0;
+  }
+
+  .early-full-width {
+    flex: 0 0 100%;
+    padding: 15px;
   }
 
   .simple-col-3 {
@@ -192,11 +234,24 @@ h1 {
     flex: 0 0 100%;
     padding: 15px;
   }
+
+  .complex-img-text h2 {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 600px) {
   h1 {
     font-size: 2rem;
+  }
+
+  .complex-img-text {
+    padding: 2rem 1rem;
+  }
+
+  .complex-img-text h2 {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
   }
 }
 
@@ -208,5 +263,19 @@ h1 {
 
   .grid-card-content > h4 {
     font-size: 0.875rem;
+  }
+
+  .complex-img-text h2 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .complex-img-text {
+    padding: 1rem 0;
+  }
+
+  .complex-img-text h2 {
+    font-size: 0.75rem;
   }
 }

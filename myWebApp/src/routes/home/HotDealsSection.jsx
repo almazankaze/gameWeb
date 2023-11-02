@@ -13,7 +13,7 @@ const HotDealsSection = () => {
         <div className="simple-grid">
           <div className="simple-col-2">
             <div className="simple-col-img">
-              <img src={deal1} alt="deal-img" />
+              <img src={deal1} className="img-fade" alt="deal-img" />
               <div className="simple-img-text">
                 <p>shop now</p>
                 <hr />
@@ -22,7 +22,7 @@ const HotDealsSection = () => {
           </div>
           <div className="simple-col-2">
             <div className="simple-col-img">
-              <img src={deal2} alt="deal-img" />
+              <img src={deal2} className="img-fade" alt="deal-img" />
               <div className="simple-img-text">
                 <p>shop now</p>
                 <hr />
@@ -31,7 +31,7 @@ const HotDealsSection = () => {
           </div>
           <div className="simple-col-3">
             <div className="simple-col-img">
-              <img src={deal3} alt="deal-img" />
+              <img src={deal3} className="img-fade" alt="deal-img" />
               <div className="simple-img-text">
                 <p>shop now</p>
                 <hr />
@@ -40,7 +40,7 @@ const HotDealsSection = () => {
           </div>
           <div className="simple-col-3">
             <div className="simple-col-img">
-              <img src={deal4} alt="deal-img" />
+              <img src={deal4} className="img-fade" alt="deal-img" />
               <div className="simple-img-text">
                 <p>shop now</p>
                 <hr />
@@ -49,7 +49,7 @@ const HotDealsSection = () => {
           </div>
           <div className="simple-col-3">
             <div className="simple-col-img">
-              <img src={deal5} alt="deal-img" />
+              <img src={deal5} className="img-fade" alt="deal-img" />
               <div className="simple-img-text">
                 <p>shop now</p>
                 <hr />
