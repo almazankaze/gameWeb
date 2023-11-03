@@ -37,16 +37,7 @@ export const BaseButton = styled.button`
 `;
 
 export const CartButton = styled(BaseButton)`
-  background-color: var(--cart-btn);
-  color: var(--black);
   margin: 0.75rem 0;
-  border: 1px solid var(--cart-btn);
-
-  &:hover {
-    background-color: #fff200;
-    color: var(--black);
-    border: 1px solid #fff200;
-  }
 `;
 
 export const HeroButton = styled(CartButton)``;

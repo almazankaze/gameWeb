@@ -1,0 +1,15 @@
+.review {
+  display: flex;
+}
+
+.star-on {
+  fill: var(--secondary-color);
+}
+
+.star-off {
+  fill: var(--gray-400);
+}
+
+.star-half {
+  fill: url(#MyGradient);
+}

@@ -1,0 +1,58 @@
+:root {
+  --swiper-navigation-size: 20px;
+}
+
+.mySwiper {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  position: relative;
+}
+
+.slider-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 6px;
+  color: var(--white);
+  background-color: var(--black);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  transform: scale(0.8);
+}
+
+.slider-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.swiper-button-prev {
+  top: 50%;
+  left: -42px;
+  transform: translateY(-60%);
+  transition: left 0.3s ease-in-out;
+}
+.swiper-button-next {
+  top: 50%;
+  right: -42px;
+  transform: translateY(-60%);
+  transition: right 0.3s ease-in-out;
+}
+
+.mySwiper:hover .swiper-button-prev {
+  left: 20px;
+}
+
+.mySwiper:hover:hover .swiper-button-next {
+  right: 20px;
+}
+
+@media (max-width: 1200px) {
+  .slider-btn {
+    display: none;
+  }
+}

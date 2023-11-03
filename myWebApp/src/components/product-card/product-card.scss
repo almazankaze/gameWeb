@@ -1,0 +1,98 @@
+.card {
+  position: relative;
+  border-radius: 10px;
+  background-color: var(--third-color);
+  max-width: 100%;
+  margin: 0 0.5rem;
+}
+
+.card-image {
+  display: grid;
+  place-items: center;
+
+  cursor: pointer;
+}
+
+.card-image img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card-percent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.125rem;
+  width: max-content;
+  font-weight: 700;
+  color: var(--white);
+  padding: 0.375em 0.5em;
+  background-color: var(--secondary-color);
+  border-radius: 6px 0 6px 0;
+  cursor: default;
+}
+
+.card-corner-btns {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.75rem;
+}
+
+.card-btn {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 0.5rem 0.5rem 0.125rem;
+  transform: scale(0.8);
+  border-radius: 6px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.card-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.card-details {
+  padding: 20px;
+}
+
+.card-details h5 {
+  cursor: pointer;
+}
+
+.card-bonus-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.card-stock {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--white);
+  padding: 0.375em 0.5em;
+  background-color: rgb(56, 201, 56);
+  border-radius: 4px;
+}
+
+.card-soldout {
+  background-color: rgb(238, 69, 69);
+}
+
+.card-desc {
+  color: var(--gray-600);
+  min-height: 36px;
+}
+
+.card-price {
+  display: flex;
+  align-items: baseline;
+  color: var(--secondary-color);
+}
+
+.original-price {
+  color: var(--white);
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+}
