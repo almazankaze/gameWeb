@@ -202,6 +202,10 @@
   cursor: pointer;
 }
 
+.menu-grid-item img {
+  height: 100px;
+}
+
 .menu-grid-item p {
   color: var(--white);
   transition: all 0.2s ease-in-out;

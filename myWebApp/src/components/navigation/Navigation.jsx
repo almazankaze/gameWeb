@@ -24,6 +24,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
+import ps5Pic from "../../assets/home-images/temp.png";
 import "./navigation.scss";
 
 const Navigation = () => {
@@ -89,21 +90,27 @@ const Navigation = () => {
                       <hr></hr>
                       <div className="menu-grid">
                         <div className="menu-grid-item">
+                          <img src={ps5Pic} alt="ps5" />
                           <p>Nintendo Switch</p>
                         </div>
                         <div className="menu-grid-item">
+                          <img src={ps5Pic} alt="ps5" />
                           <p>Xbox Series X</p>
                         </div>
                         <div className="menu-grid-item">
+                          <img src={ps5Pic} alt="ps5" />
                           <p>Playstation 5</p>
                         </div>
                         <div className="menu-grid-item">
+                          <img src={ps5Pic} alt="ps5" />
                           <p>Handhelds</p>
                         </div>
                         <div className="menu-grid-item">
+                          <img src={ps5Pic} alt="ps5" />
                           <p>PC</p>
                         </div>
                         <div className="menu-grid-item">
+                          <img src={ps5Pic} alt="ps5" />
                           <p>Retro</p>
                         </div>
                       </div>

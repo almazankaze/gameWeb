@@ -4,7 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
 
-import tempImg from "../../assets/home-images/temp-img.png";
+import tempImg from "../../assets/home-images/fire-engage.png";
 
 import "./product-card.scss";
 

@@ -198,6 +198,10 @@ h1 {
   margin: 1rem;
 }
 
+.secondary-color {
+  color: var(--secondary-color);
+}
+
 @media (max-width: 1250px) {
   .nav-open-background {
     display: block;
