@@ -1,0 +1,41 @@
+.shop-grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(1fr, 4);
+  grid-template-areas:
+    "searchQuery ..... ..... dropdown"
+    "sidebar product product product"
+    "sidebar product product product"
+    "sidebar product product product"
+    "..... product product product"
+    "..... footer footer footer";
+  padding-top: 2rem;
+}
+
+.box {
+  background-color: var(--third-color);
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 150%;
+}
+
+.shop-search-query {
+  grid-area: searchQuery;
+}
+
+.shop-dropdown-box {
+  grid-area: dropdown;
+}
+
+.shop-sidebar {
+  grid-area: sidebar;
+}
+
+.shop-product {
+  grid-area: product;
+}
+
+.shop-footer {
+  grid-area: footer;
+}

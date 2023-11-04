@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsMenuOpen } from "./store/navbar/navbar-selector";
 import Home from "./routes/home/Home";
+import ShopSearch from "./routes/shop/ShopSearch";
 import About from "./routes/about/About";
 
 import Footer from "./components/footer/Footer";
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
+          <Route path="shop" element={<ShopSearch />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<Home />} />
         </Route>
