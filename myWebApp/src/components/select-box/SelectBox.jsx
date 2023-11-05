@@ -13,7 +13,6 @@ const SelectBox = () => {
 
   useEffect(() => {
     const closeDropdown = (e) => {
-      console.log(e);
       if (
         e.target !== btnRef.current &&
         e.target.innerText !== "Order By" &&

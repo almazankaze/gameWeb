@@ -1,7 +1,7 @@
 .shop-grid {
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(1fr, 4);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "searchQuery ..... ..... dropdown"
     "sidebar product product product"
@@ -10,14 +10,6 @@
     "..... product product product"
     "..... footer footer footer";
   padding-top: 2rem;
-}
-
-.box {
-  background-color: var(--third-color);
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 150%;
 }
 
 .shop-search-query {
@@ -36,29 +28,25 @@
 
 .shop-sidebar {
   grid-area: sidebar;
+  border-radius: 5px;
+  background-color: var(--third-color);
 }
 
 .shop-product {
   grid-area: product;
 }
 
+.shop-product-results {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
 .shop-footer {
   grid-area: footer;
 }
 
-@media (max-width: 768px) {
-  .shop-grid {
-    grid-template-areas:
-      "searchQuery ..... dropdown ....."
-      "sidebar product product product"
-      "sidebar product product product"
-      "sidebar product product product"
-      "..... product product product"
-      "..... footer footer footer";
-  }
-}
-
-@media (max-width: 700px) {
+@media (max-width: 780px) {
   .shop-grid {
     grid-template-columns: 1fr;
     grid-template-areas:

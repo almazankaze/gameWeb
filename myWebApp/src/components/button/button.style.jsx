@@ -42,25 +42,18 @@ export const CartButton = styled(BaseButton)`
 
 export const HeroButton = styled(CartButton)``;
 
-export const DetailButton = styled(BaseButton)`
-  background: transparent;
-  color: var(--black);
-  margin: 0;
-  margin-right: 12px;
-  font-weight: 500;
-  border: 1px solid var(--gray-500);
-  border-bottom: none;
+export const DetailButton = styled(CartButton)`
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 1em 0.5em;
 
-  &:hover {
-    background: transparent;
-    border: 1px solid var(--gray-500);
-    border-bottom: none;
+  @media (max-width: 1025px) {
+    font-size: 0.75rem;
   }
 
-  &.active-detail {
-    background-color: #fff200;
-    border: 1px solid #fff200;
-    border-bottom: none;
+  @media (max-width: 480px) {
+    width: 100%;
+    font-size: 0.875rem;
   }
 `;
 

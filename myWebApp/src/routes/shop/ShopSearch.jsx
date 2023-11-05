@@ -1,4 +1,9 @@
 import SelectBox from "../../components/select-box/SelectBox";
+import ProductCardLong from "../../components/product-card/ProductCardLong";
+import FilterSidebar from "../../components/filter-sidebar/FilterSidebar";
+
+import SHOP_DATA from "../../shop-data";
+
 import "./shopSearch.scss";
 
 const ShopSearch = () => {
@@ -13,11 +18,15 @@ const ShopSearch = () => {
         <div className="shop-dropdown-box">
           <SelectBox />
         </div>
-        <div className="box shop-sidebar">Sidebar</div>
-        <div className="box shop-product">
-          Content
-          <br /> More content than we had before so this column is now quite
-          tall.
+        <div className="shop-sidebar">
+          <FilterSidebar />
+        </div>
+        <div className="shop-product">
+          <div className="shop-product-results">
+            {SHOP_DATA.map((card) => (
+              <ProductCardLong key={card.id} product={card} />
+            ))}
+          </div>
         </div>
         <div className="box shop-footer">Footer</div>
       </div>

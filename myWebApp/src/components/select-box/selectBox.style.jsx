@@ -13,6 +13,10 @@ export const BaseSelector = styled.div`
   max-width: 124px;
   height: 38px;
   cursor: pointer;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-text-select: none;
+  -webkit-user-select: none;
 
   &.dropbox-selected {
     border: 2px solid var(--secondary-color);
