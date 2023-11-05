@@ -1,11 +1,18 @@
+import SelectBox from "../../components/select-box/SelectBox";
 import "./shopSearch.scss";
 
 const ShopSearch = () => {
   return (
     <section className="container">
       <div className="shop-grid">
-        <div className="box shop-search-query">Header</div>
-        <div className="box shop-dropdown-box">Header</div>
+        <div className=" shop-search-query">
+          <h3>
+            Results for <span>Fire Emblem</span>
+          </h3>
+        </div>
+        <div className="shop-dropdown-box">
+          <SelectBox />
+        </div>
         <div className="box shop-sidebar">Sidebar</div>
         <div className="box shop-product">
           Content

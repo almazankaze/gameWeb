@@ -22,10 +22,16 @@
 
 .shop-search-query {
   grid-area: searchQuery;
+  align-self: end;
+}
+
+.shop-search-query span {
+  color: var(--secondary-color);
 }
 
 .shop-dropdown-box {
   grid-area: dropdown;
+  justify-self: end;
 }
 
 .shop-sidebar {
@@ -38,4 +44,32 @@
 
 .shop-footer {
   grid-area: footer;
+}
+
+@media (max-width: 768px) {
+  .shop-grid {
+    grid-template-areas:
+      "searchQuery ..... dropdown ....."
+      "sidebar product product product"
+      "sidebar product product product"
+      "sidebar product product product"
+      "..... product product product"
+      "..... footer footer footer";
+  }
+}
+
+@media (max-width: 700px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "searchQuery"
+      "dropdown"
+      "sidebar"
+      "product"
+      "footer";
+  }
+
+  .shop-dropdown-box {
+    justify-self: start;
+  }
 }
