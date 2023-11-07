@@ -5,6 +5,7 @@ import FilterSidebar from "../../components/filter-sidebar/FilterSidebar";
 import SHOP_DATA from "../../shop-data";
 
 import "./shopSearch.scss";
+import Pagination from "../../components/pagination/Pagination";
 
 const ShopSearch = () => {
   return (
@@ -28,7 +29,14 @@ const ShopSearch = () => {
             ))}
           </div>
         </div>
-        <div className="box shop-footer">Footer</div>
+        <div className="box shop-footer">
+          <Pagination
+            currentPage={1}
+            pages={100}
+            path={"/shop"}
+            loading={false}
+          />
+        </div>
       </div>
     </section>
   );

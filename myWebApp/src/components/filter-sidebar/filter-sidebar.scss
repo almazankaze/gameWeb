@@ -2,9 +2,13 @@
   padding: 1rem;
 }
 
+.filter-sidebar-content {
+  margin-top: 1rem;
+  max-height: max-content;
+}
+
 .filter-title {
   text-align: center;
-  margin-bottom: 1rem;
 }
 
 .filter-section {
@@ -14,4 +18,45 @@
 
 .filter-section h4 {
   margin-bottom: 0.5rem;
+}
+
+.filter-price-range {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filter-input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 2px solid var(--gray-700);
+  background-color: var(--black);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  color: var(--white);
+  appearance: none;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition: border-color 0.25s ease-in-out;
+}
+
+.filter-input:focus {
+  border-color: var(--secondary-color);
+}
+
+@media (max-width: 1025px) {
+  .filter-sidebar-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s ease-in-out;
+  }
+
+  .filter-show {
+    max-height: 100vh;
+  }
+
+  .filter-title {
+    cursor: pointer;
+  }
 }

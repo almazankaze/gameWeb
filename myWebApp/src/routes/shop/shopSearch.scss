@@ -46,6 +46,17 @@
   grid-area: footer;
 }
 
+@media (max-width: 1025px) {
+  .shop-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "searchQuery dropdown"
+      "sidebar sidebar"
+      "product product"
+      "footer footer";
+  }
+}
+
 @media (max-width: 780px) {
   .shop-grid {
     grid-template-columns: 1fr;

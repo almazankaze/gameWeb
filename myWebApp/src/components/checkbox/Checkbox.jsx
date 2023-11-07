@@ -8,7 +8,7 @@ import {
 } from "./Checkbox.style";
 
 const Checkbox = ({ label }) => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   return (
     <CheckBoxContainer>
