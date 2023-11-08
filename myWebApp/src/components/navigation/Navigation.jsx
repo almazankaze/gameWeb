@@ -12,6 +12,8 @@ import {
   setIsSearchOpen,
 } from "../../store/navbar/navbar-actions";
 
+import { selectCartCount } from "../../store/cart/cart-selector";
+
 import SideBar from "./SideBar";
 import SearchForm from "../search-form/SearchForm";
 import DropDownContainer from "../drop-down/DropDownContainer";
@@ -31,6 +33,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
   const isMenuOpen = useSelector(selectIsMenuOpen);
   const isSearchOpen = useSelector(selectIsSearchOpen);
+  const cartCount = useSelector(selectCartCount);
   const [isTopPage, setIsTopPage] = useState(true);
 
   const searchClassNames = classNames({
@@ -38,9 +41,11 @@ const Navigation = () => {
     navsearch: !isSearchOpen,
   });
 
-  const cartCount = 8;
-
   const navigate = useNavigate();
+
+  const goToCartHandler = () => {
+    navigate("/cart");
+  };
 
   const toggleIsMenuOpen = () => {
     dispatch(setIsSearchOpen(false));
@@ -195,7 +200,7 @@ const Navigation = () => {
                 onClick={toggleIsSearchOpen}
               />
             </div>
-            <div className="icon-container">
+            <div className="icon-container" onClick={goToCartHandler}>
               <ShoppingCartOutlinedIcon className="navbar-icon" />
               <span className="badge">
                 {" "}

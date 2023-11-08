@@ -202,6 +202,11 @@ h1 {
   color: var(--secondary-color);
 }
 
+.text-link {
+  text-decoration: none;
+  color: var(--white);
+}
+
 @media (max-width: 1250px) {
   .nav-open-background {
     display: block;

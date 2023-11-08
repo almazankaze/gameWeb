@@ -1,8 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { selectCartItems } from "../../store/cart/cart-selector";
+import { addItemToCart } from "../../store/cart/cart-actions";
 import StarReview from "../star-review/StarReview";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
+import currency from "currency.js";
 
 import tempImg from "../../assets/home-images/fire-engage.png";
 
@@ -21,10 +25,16 @@ function ProductCard({ product }) {
     img,
   } = product;
 
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector(selectCartItems);
+
+  const addProductToCart = () => dispatch(addItemToCart(cartItems, product));
+
   return (
     <div className="card">
       <div className="card-image">
-        <Link to={`product/${id}`}>
+        <Link to={`/product/${id}`}>
           <img src={tempImg} alt="product-img" />
         </Link>
         {percentOff ? (
@@ -49,16 +59,25 @@ function ProductCard({ product }) {
             {inStock ? "INSTOCK" : "SOLDOUT"}
           </div>
         </div>
-        <h5 className="overflow-text mb-small">{shortname}</h5>
+        <Link className="text-link" to={`/product/${id}`}>
+          <h5 className="overflow-text mb-small">{shortname}</h5>
+        </Link>
 
         <div className="card-price mb-small">
-          <h3>${dprice ? dprice : oprice}</h3>
-          {dprice ? <p className="original-price">${oprice}</p> : ""}
+          <h3>
+            {dprice ? currency(dprice).format() : currency(oprice).format()}
+          </h3>
+          {dprice ? (
+            <p className="original-price">{currency(oprice).format()}</p>
+          ) : (
+            ""
+          )}
         </div>
         <Button
           type="button"
           buttonType={BUTTON_TYPE_CLASSES.cart}
           className="full-btn"
+          onClick={addProductToCart}
         >
           Add to Cart
         </Button>

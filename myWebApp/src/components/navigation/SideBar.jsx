@@ -12,11 +12,11 @@ import PrintOutlinedIcon from "@mui/icons-material/PrintOutlined";
 import SmartphoneOutlinedIcon from "@mui/icons-material/SmartphoneOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
-import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 
 import { selectIsMenuOpen } from "../../store/navbar/navbar-selector";
 import { setIsMenuOpen } from "../../store/navbar/navbar-actions";
+import { selectCartCount } from "../../store/cart/cart-selector";
 
 import "./sidebar.scss";
 
@@ -25,7 +25,7 @@ const SideBar = () => {
   const [showHardware, setShowHardware] = useState(false);
   const [showPeripherals, setShowPeripherals] = useState(false);
   const isMenuOpen = useSelector(selectIsMenuOpen);
-  const cartCount = 9;
+  const cartCount = useSelector(selectCartCount);
 
   const toggleIsMenuOpen = () => dispatch(setIsMenuOpen(!isMenuOpen));
 

@@ -1,3 +1,5 @@
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import SelectBox from "../../components/select-box/SelectBox";
 import ProductCardLong from "../../components/product-card/ProductCardLong";
 import FilterSidebar from "../../components/filter-sidebar/FilterSidebar";
@@ -8,6 +10,22 @@ import "./shopSearch.scss";
 import Pagination from "../../components/pagination/Pagination";
 
 const ShopSearch = () => {
+  function useQuery() {
+    const { search } = useLocation();
+
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+
+  let query = useQuery();
+
+  let page = +query.get("page");
+  if (page === 0) page = 1;
+
+  const offset = page * 18 - 18;
+
+  let searchQuery = query.get("searchQuery");
+  if (searchQuery === null) searchQuery = "";
+
   return (
     <section className="container">
       <div className="shop-grid">
@@ -31,9 +49,9 @@ const ShopSearch = () => {
         </div>
         <div className="box shop-footer">
           <Pagination
-            currentPage={1}
+            currentPage={page}
             pages={100}
-            path={"/shop"}
+            path={`/shop?searchQuery=${""}&`}
             loading={false}
           />
         </div>
