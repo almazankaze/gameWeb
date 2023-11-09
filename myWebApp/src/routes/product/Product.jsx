@@ -1,14 +1,29 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../../store/cart/cart-selector";
+import { addItemToCart } from "../../store/cart/cart-actions";
 import Button, { BUTTON_TYPE_CLASSES } from "../../components/button/Button";
 import ProductReview from "./ProductReview";
 import ImageZoom from "../../components/image-zoom/ImageZoom";
+import StarReview from "../../components/star-review/StarReview";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+
+import currency from "currency.js";
 import tempImg from "../../assets/home-images/fire-engage.png";
+import SHOP_DATA from "../../shop-data";
 
 import "./product.scss";
 
 const Product = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector(selectCartItems);
+
   const [detailsBtn, setDetailsBtn] = useState(true);
   const [reviewBtn, setReviewBtn] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   const toggleDetailsBtn = () => {
     if (!detailsBtn) {
@@ -24,12 +39,104 @@ const Product = () => {
     }
   };
 
+  const handleTextChange = (evt) => {
+    setQuantity(parseInt(evt.target.value));
+  };
+
+  const increment = () => {
+    if (quantity < 50) setQuantity(quantity + 1);
+  };
+
+  const decrement = () => {
+    setQuantity(quantity > 0 ? quantity - 1 : 0);
+  };
+
+  const addProductToCart = () => {
+    if (quantity <= 0) return;
+    dispatch(addItemToCart(cartItems, SHOP_DATA[0], quantity));
+    setQuantity(0);
+  };
+
   return (
     <section className="container">
       <div className="product-page-container">
         <div className="product-control-container">
           <ImageZoom zoomImg={tempImg} />
-          <div className="product-controller"></div>
+          <div className="product-controller">
+            <h2>{SHOP_DATA[0].name}</h2>
+
+            <div className="product-control-review">
+              <StarReview rating={SHOP_DATA[0].rating} />
+              <p>(2 customer reviews)</p>
+            </div>
+
+            <div className="product-control-price">
+              <h3>
+                {SHOP_DATA[0].dprice
+                  ? currency(SHOP_DATA[0].dprice).format()
+                  : currency(SHOP_DATA[0].oprice).format()}
+              </h3>
+              {SHOP_DATA[0].dprice ? (
+                <p className="product-slashed-price">
+                  {currency(SHOP_DATA[0].oprice).format()}
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
+            <div
+              className={
+                SHOP_DATA[0].inStock
+                  ? "product-stock"
+                  : "product-stock product-soldout"
+              }
+            >
+              {SHOP_DATA[0].inStock ? "INSTOCK" : "SOLDOUT"}
+            </div>
+
+            <div className="product-control-quantity">
+              <div className="quantity-input">
+                <button
+                  className="quantity-input-btn quantity-input-btn__left"
+                  onClick={decrement}
+                >
+                  &mdash;
+                </button>
+                <input
+                  className="quantity-input-screen"
+                  type="number"
+                  value={quantity}
+                />
+                <button
+                  className="quantity-input-btn quantity-input-btn__right"
+                  onClick={increment}
+                >
+                  &#xff0b;
+                </button>
+              </div>
+              <div className="quantity-buttons">
+                <Button
+                  type="button"
+                  buttonType={BUTTON_TYPE_CLASSES.cart}
+                  onClick={addProductToCart}
+                >
+                  Add to Cart
+                </Button>
+                <div className="product-favorite-btn">
+                  <FavoriteBorderIcon />
+                </div>
+              </div>
+            </div>
+
+            <div className="product-extra-details">
+              <p>Free shipping on orders over $30!</p>
+              <ul>
+                <li>Satisfaction Guaranteed</li>
+                <li>No Hassle Refunds</li>
+                <li>Secure Payments</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div className="product-button-container">
           <Button
