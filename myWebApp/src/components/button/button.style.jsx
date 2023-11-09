@@ -57,6 +57,49 @@ export const DetailButton = styled(CartButton)`
   }
 `;
 
+export const ClearButton = styled(BaseButton)`
+  background: transparent;
+  color: var(--white);
+  margin: 0;
+  font-weight: 500;
+  border: 1px solid var(--secondary-color);
+
+  &:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+  }
+`;
+
+export const SwitchButton = styled(ClearButton)`
+  margin-right: 12px;
+  border-bottom: none;
+  border-radius: 0;
+
+  &:hover {
+    background: transparent;
+    border-bottom: none;
+  }
+
+  &.active-detail {
+    background-color: var(--secondary-color);
+    border-bottom: none;
+  }
+
+  &.active-detail:hover {
+    color: var(--white);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    font-size: 0.875rem;
+    margin-right: 0;
+  }
+
+  @media (max-width: 300px) {
+    font-size: 0.75rem;
+  }
+`;
+
 export const LoadingSpinner = styled.div`
   display: inline-block;
   width: 30px;
