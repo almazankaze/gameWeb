@@ -34,6 +34,10 @@ export const BaseButton = styled.button`
     font-size: 1rem;
     min-width: 80px;
   }
+
+  @media (max-width: 320px) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const CartButton = styled(BaseButton)`
@@ -76,7 +80,7 @@ export const SwitchButton = styled(ClearButton)`
   border-radius: 0;
 
   &:hover {
-    background: transparent;
+    background-color: var(--secondary-color);
     border-bottom: none;
   }
 

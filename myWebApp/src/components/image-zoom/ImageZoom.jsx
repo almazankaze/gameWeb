@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { ZoomImage } from "./image-zoom.style.jsx";
 
-const ImageZoom = ({ zoomImg, width = "450px", border = true }) => {
+const ImageZoom = ({ zoomImg, width = 450, border = true }) => {
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
 
   const backgroundImg = {

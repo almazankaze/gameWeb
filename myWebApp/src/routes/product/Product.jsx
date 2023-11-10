@@ -24,6 +24,7 @@ const Product = () => {
   const [detailsBtn, setDetailsBtn] = useState(true);
   const [reviewBtn, setReviewBtn] = useState(false);
   const [quantity, setQuantity] = useState(0);
+  const [currentImg, setCurrentImg] = useState(0);
 
   const toggleDetailsBtn = () => {
     if (!detailsBtn) {
@@ -37,10 +38,6 @@ const Product = () => {
       setDetailsBtn(false);
       setReviewBtn(true);
     }
-  };
-
-  const handleTextChange = (evt) => {
-    setQuantity(parseInt(evt.target.value));
   };
 
   const increment = () => {
@@ -61,7 +58,24 @@ const Product = () => {
     <section className="container">
       <div className="product-page-container">
         <div className="product-control-container">
-          <ImageZoom zoomImg={tempImg} />
+          <div className="product-image-controller">
+            <ImageZoom zoomImg={tempImg} />
+            <div className="product-small-images">
+              <div className="small-image-container">
+                <img src={tempImg} alt="small" />
+              </div>
+              <div className="small-image-container">
+                <img src={tempImg} alt="small" />
+              </div>
+              <div className="small-image-container">
+                <img src={tempImg} alt="small" />
+              </div>
+              <div className="small-image-container">
+                <img src={tempImg} alt="small" />
+              </div>
+            </div>
+          </div>
+
           <div className="product-controller">
             <h2>{SHOP_DATA[0].name}</h2>
 
@@ -70,28 +84,30 @@ const Product = () => {
               <p>(2 customer reviews)</p>
             </div>
 
-            <div className="product-control-price">
-              <h3>
-                {SHOP_DATA[0].dprice
-                  ? currency(SHOP_DATA[0].dprice).format()
-                  : currency(SHOP_DATA[0].oprice).format()}
-              </h3>
-              {SHOP_DATA[0].dprice ? (
-                <p className="product-slashed-price">
-                  {currency(SHOP_DATA[0].oprice).format()}
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-            <div
-              className={
-                SHOP_DATA[0].inStock
-                  ? "product-stock"
-                  : "product-stock product-soldout"
-              }
-            >
-              {SHOP_DATA[0].inStock ? "INSTOCK" : "SOLDOUT"}
+            <div className="product-price-stock">
+              <div className="product-control-price">
+                <h3>
+                  {SHOP_DATA[0].dprice
+                    ? currency(SHOP_DATA[0].dprice).format()
+                    : currency(SHOP_DATA[0].oprice).format()}
+                </h3>
+                {SHOP_DATA[0].dprice ? (
+                  <p className="product-slashed-price">
+                    {currency(SHOP_DATA[0].oprice).format()}
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div
+                className={
+                  SHOP_DATA[0].inStock
+                    ? "product-stock"
+                    : "product-stock product-soldout"
+                }
+              >
+                {SHOP_DATA[0].inStock ? "INSTOCK" : "SOLDOUT"}
+              </div>
             </div>
 
             <div className="product-control-quantity">
@@ -106,6 +122,7 @@ const Product = () => {
                   className="quantity-input-screen"
                   type="number"
                   value={quantity}
+                  readOnly
                 />
                 <button
                   className="quantity-input-btn quantity-input-btn__right"
