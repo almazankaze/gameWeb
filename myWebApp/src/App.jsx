@@ -6,6 +6,7 @@ import ShopSearch from "./routes/shop/ShopSearch";
 import About from "./routes/about/About";
 import Cart from "./routes/cart/Cart";
 import Product from "./routes/product/Product";
+import Authentication from "./routes/auth/Authentication";
 
 import Footer from "./components/footer/Footer";
 import ScrollUp from "./components/scrollup/ScrollUp";
@@ -28,6 +29,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="cart" element={<Cart />} />
             <Route path="product/:id" element={<Product />} />
+            <Route path="auth" element={<Authentication />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>

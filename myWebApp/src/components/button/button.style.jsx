@@ -40,6 +40,19 @@ export const BaseButton = styled.button`
   }
 `;
 
+export const FormButton = styled(BaseButton)`
+  margin: 0.625rem 0;
+  outline: none;
+  border-radius: 1.25rem;
+  font-size: 1rem;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+  }
+`;
+
 export const CartButton = styled(BaseButton)`
   margin: 0.75rem 0;
 `;

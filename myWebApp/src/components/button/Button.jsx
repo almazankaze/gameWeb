@@ -1,5 +1,6 @@
 import {
   BaseButton,
+  FormButton,
   CartButton,
   HeroButton,
   DetailButton,
@@ -10,6 +11,7 @@ import {
 
 export const BUTTON_TYPE_CLASSES = {
   base: "base",
+  form: "form",
   cart: "cart-btn",
   heroBtn: "hero-btn",
   detail: "detail-btn",
@@ -20,6 +22,7 @@ export const BUTTON_TYPE_CLASSES = {
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
   ({
     [BUTTON_TYPE_CLASSES.base]: BaseButton,
+    [BUTTON_TYPE_CLASSES.form]: FormButton,
     [BUTTON_TYPE_CLASSES.cart]: CartButton,
     [BUTTON_TYPE_CLASSES.heroBtn]: HeroButton,
     [BUTTON_TYPE_CLASSES.detail]: DetailButton,
