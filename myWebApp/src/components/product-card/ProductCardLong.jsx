@@ -23,7 +23,7 @@ function ProductCardLong({ product }) {
   return (
     <div className="card-long">
       <div className="card-image-long">
-        <Link to={`/product/${id}`}>
+        <Link to={`/products/${id}`}>
           <img src={tempImg} alt="product-img" />
         </Link>
         {percentOff ? (
@@ -34,7 +34,7 @@ function ProductCardLong({ product }) {
       </div>
       <div className="card-long-details">
         <div>
-          <Link className="text-link" to={`/product/${id}`}>
+          <Link className="text-link" to={`/products/${id}`}>
             <h5 className="long-card-desc mb-small overflow-text-2">{name}</h5>
           </Link>
 

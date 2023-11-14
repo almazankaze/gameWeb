@@ -34,7 +34,7 @@ function ProductCard({ product }) {
   return (
     <div className="card">
       <div className="card-image">
-        <Link to={`/product/${id}`}>
+        <Link to={`/products/${id}`}>
           <img src={tempImg} alt="product-img" />
         </Link>
         {percentOff ? (
@@ -59,7 +59,7 @@ function ProductCard({ product }) {
             {inStock ? "INSTOCK" : "SOLDOUT"}
           </div>
         </div>
-        <Link className="text-link" to={`/product/${id}`}>
+        <Link className="text-link" to={`/products/${id}`}>
           <h5 className="overflow-text mb-small">{shortname}</h5>
         </Link>
 
