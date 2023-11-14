@@ -1,8 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./pagination.scss";
 
-function Pagination({ currentPage, pages, path, loading }) {
+function Pagination({ currentPage, pages, search }) {
+  let navigate = useNavigate();
+
+  const handleBtn = (number) => {
+    navigate(`/shop?term=${search}&page=${number}`);
+  };
+
   const addBtns = () => {
     let content = [];
     let start = currentPage;
@@ -13,50 +19,46 @@ function Pagination({ currentPage, pages, path, loading }) {
 
     if (currentPage !== 1) {
       content.push(
-        <NavLink
+        <button
           className="page-btn"
           key="prev"
-          to={`/${path}page=${currentPage - 1}`}
+          onClick={() => handleBtn(currentPage - 1)}
         >
           prev
-        </NavLink>
+        </button>
       );
     }
 
     for (let i = start; i <= end; i++) {
       content.push(
-        <NavLink
+        <button
           className={
             currentPage === i
               ? "page-btn page-num-btn active-page-btn"
               : "page-btn page-num-btn"
           }
           key={i}
-          to={`/${path}page=${i}`}
+          onClick={() => handleBtn(i)}
         >
           {i}
-        </NavLink>
+        </button>
       );
     }
 
     if (currentPage !== pages) {
       content.push(
-        <NavLink
+        <button
           className="page-btn"
           key="next"
-          to={`/${path}page=${currentPage + 1}`}
+          onClick={() => handleBtn(currentPage + 1)}
         >
           next
-        </NavLink>
+        </button>
       );
     }
 
     return content;
   };
-
-  if (loading || pages === 0) {
-    return <div></div>;
-  }
   return <div className="pagination-container">{addBtns()}</div>;
 }
 

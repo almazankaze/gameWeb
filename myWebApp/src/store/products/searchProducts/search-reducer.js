@@ -1,7 +1,7 @@
 import { PRODUCTS_ACTION_TYPES } from "../products-types";
 
 export const PRODUCT_INITIAL_STATE = {
-  searchResults: [],
+  searchResults: { pages: 0, result: [], page: 1 },
   isLoading: false,
   error: null,
 };
@@ -16,7 +16,7 @@ export const searchReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
         isLoading: true,
       };
     case PRODUCTS_ACTION_TYPES.FETCH_SEARCH_SUCCESS:
-      return { ...state, isLoading: false, product: payload };
+      return { ...state, isLoading: false, searchResults: payload };
     case PRODUCTS_ACTION_TYPES.FETCH_SEARCH_FAILED:
       return { ...state, isLoading: false, error: payload };
     default:

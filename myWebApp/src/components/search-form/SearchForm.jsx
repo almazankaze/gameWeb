@@ -1,19 +1,28 @@
-import { useState } from "react";
+import { useRef } from "react";
+import {
+  setIsMenuOpen,
+  setIsSearchOpen,
+} from "../../store/navbar/navbar-actions";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 
 import "./searchform.scss";
 
 const SearchForm = () => {
-  const [textField, setTextField] = useState("");
+  const formRef = useRef(null);
 
-  const handleTextChange = (evt) => {
-    setTextField(evt.target.value);
-  };
+  let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setTextField("");
+    const searchTerm = formRef.current["searchTerm"].value;
+
+    if (searchTerm) {
+      navigate(`/shop?term=${searchTerm}&page=${1}`);
+    }
+
+    formRef.current.reset();
   };
 
   return (
@@ -22,6 +31,7 @@ const SearchForm = () => {
         className="search-form"
         autoComplete="off"
         noValidate
+        ref={formRef}
         onSubmit={handleSubmit}
       >
         <input
@@ -29,9 +39,8 @@ const SearchForm = () => {
           className="search-input"
           placeholder="Search..."
           name="searchTerm"
-          onChange={handleTextChange}
         ></input>
-        <SearchIcon className="search-icon" />
+        <SearchIcon className="search-icon" onClick={handleSubmit} />
       </form>
     </div>
   );

@@ -208,6 +208,10 @@ h1 {
   color: var(--white);
 }
 
+.text-center {
+  text-align: center;
+}
+
 @media (max-width: 1250px) {
   .nav-open-background {
     display: block;
