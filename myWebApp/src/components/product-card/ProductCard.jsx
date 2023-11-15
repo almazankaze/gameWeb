@@ -17,8 +17,8 @@ function ProductCard({ product }) {
     id,
     shortname,
     desc,
-    dprice,
-    oprice,
+    price,
+    onSale,
     percentOff,
     rating,
     inStock,
@@ -64,11 +64,11 @@ function ProductCard({ product }) {
         </Link>
 
         <div className="card-price mb-small">
-          <h3>
-            {dprice ? currency(dprice).format() : currency(oprice).format()}
-          </h3>
-          {dprice ? (
-            <p className="original-price">{currency(oprice).format()}</p>
+          <h3>{currency(price.current).format()}</h3>
+          {onSale ? (
+            <p className="original-price">
+              {currency(price.original).format()}
+            </p>
           ) : (
             ""
           )}

@@ -11,8 +11,7 @@ import tempImg from "../../assets/home-images/fire-engage.png";
 import "./product-card-long.scss";
 
 function ProductCardLong({ product }) {
-  const { id, name, dprice, oprice, percentOff, rating, inStock, img } =
-    product;
+  const { id, name, price, onSale, percentOff, rating, inStock, img } = product;
 
   const dispatch = useDispatch();
 
@@ -48,11 +47,11 @@ function ProductCardLong({ product }) {
 
         <div className="card-long-price">
           <div className="card-price mb-small">
-            <h3>
-              {dprice ? currency(dprice).format() : currency(oprice).format()}
-            </h3>
-            {dprice ? (
-              <p className="original-price">{currency(oprice).format()}</p>
+            <h3>{currency(price.current).format()}</h3>
+            {onSale ? (
+              <p className="original-price">
+                {currency(price.original).format()}
+              </p>
             ) : (
               ""
             )}
