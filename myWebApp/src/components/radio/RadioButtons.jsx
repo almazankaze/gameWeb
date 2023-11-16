@@ -8,7 +8,12 @@ import {
   RadioButton,
 } from "./RadioButtons.style";
 
-const RadioButtons = ({ name = "myRadio", buttons = [], ...otherProps }) => {
+const RadioButtons = ({
+  forwardedRef,
+  name = "myRadio",
+  buttons = [],
+  ...otherProps
+}) => {
   const [checked, setChecked] = useState(buttons[0]);
 
   const handleSelectChange = (e) => {
@@ -16,7 +21,7 @@ const RadioButtons = ({ name = "myRadio", buttons = [], ...otherProps }) => {
   };
 
   return (
-    <RadioButtonsContainer {...otherProps}>
+    <RadioButtonsContainer ref={forwardedRef} checked={checked} {...otherProps}>
       {buttons.map((button) => (
         <RadioButtonContainer>
           <HiddenRadioButton

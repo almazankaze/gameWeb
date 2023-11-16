@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Checkbox from "../checkbox/Checkbox";
 import Button from "../button/Button";
 import RadioButtons from "../radio/RadioButtons";
@@ -21,9 +21,9 @@ const FilterSidebar = () => {
   const [freeShipChecked, setFreeShipChecked] = useState(false);
   const [inStockChecked, setInStockChecked] = useState(false);
   const [platforms, setPlatforms] = useState(new Array(6).fill(false));
-  const [productType, setProductType] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
+  const productType = useRef(null);
 
   const handleApplyFilters = () => {
     console.log(`with discount: ${onSaleChecked}`);
@@ -33,6 +33,8 @@ const FilterSidebar = () => {
     platforms.forEach((platform, i) => {
       console.log(`${initPlatforms[i]}: ${platform}`);
     });
+
+    console.log(`product type: ${productType.current.checked}`);
 
     //if(isNaN(minPrice) || minPrice <= 0) {setMinPrice()}
     console.log(`min Price: ${minPrice}`);
@@ -91,7 +93,11 @@ const FilterSidebar = () => {
         </div>
         <div className="filter-section">
           <h4>Product Type</h4>
-          <RadioButtons name={"productType"} buttons={productTypes} />
+          <RadioButtons
+            name={"productType"}
+            buttons={productTypes}
+            forwardedRef={productType}
+          />
         </div>
         <div className="filter-section">
           <h4>Platform</h4>
