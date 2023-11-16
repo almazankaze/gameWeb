@@ -7,11 +7,11 @@ import {
   BaseCheckbox,
 } from "./Checkbox.style";
 
-const Checkbox = ({ label }) => {
+const Checkbox = ({ label, ...otherProps }) => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <CheckBoxContainer>
+    <CheckBoxContainer {...otherProps}>
       <HiddenCheckbox
         checked={checked}
         onChange={() => setChecked((prev) => !prev)}

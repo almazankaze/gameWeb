@@ -17,7 +17,12 @@ const ShopReseults = ({ searchQuery }) => {
       </div>
     );
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className="shop-product">
+        <Spinner />
+      </div>
+    );
   return (
     <>
       <div className="shop-product">
