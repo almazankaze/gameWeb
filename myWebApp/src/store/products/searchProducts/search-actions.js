@@ -14,11 +14,31 @@ export const fetchSearchSuccess = (product) =>
 export const fetchSearchFailure = (error) =>
   createAction(PRODUCTS_ACTION_TYPES.FETCH_SEARCH_FAILED, error);
 
-export const getSearchProducts = (searchTerm, page = 1) => {
+export const getSearchProducts = (
+  searchTerm,
+  onSale,
+  freeShip,
+  inStock,
+  productType,
+  categories,
+  minPrice,
+  maxPrice,
+  page = 1
+) => {
   return async (dispatch) => {
     dispatch(fetchSearchStart());
     try {
-      const { data } = await api.fetchSearchProducts(searchTerm, page);
+      const { data } = await api.fetchSearchProducts(
+        searchTerm,
+        onSale,
+        freeShip,
+        inStock,
+        productType,
+        categories,
+        minPrice,
+        maxPrice,
+        page
+      );
       dispatch(fetchSearchSuccess(data));
     } catch (e) {
       dispatch(fetchSearchFailure(e));

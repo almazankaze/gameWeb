@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getSearchProducts } from "../../store/products/searchProducts/search-actions";
 import SelectBox from "../../components/select-box/SelectBox";
 import FilterSidebar from "../../components/filter-sidebar/FilterSidebar";
-import ShopReseults from "./ShopReseults";
+import ShopReseults from "./ShopResults";
 
 import "./shopSearch.scss";
 
@@ -25,8 +25,28 @@ const ShopSearch = () => {
   let searchQuery = query.get("term");
   if (searchQuery === null) searchQuery = "";
 
+  const onSale = query.get("onSale") || false;
+  const freeShip = query.get("freeShip") || false;
+  const inStock = query.get("inStock") || false;
+  const productType = query.get("productType") || "All";
+  const categories = query.getAll("categories") || "";
+  const minPrice = query.get("minPrice") || 0;
+  const maxPrice = query.get("maxPrice") || 10000;
+
   useEffect(() => {
-    dispatch(getSearchProducts(searchQuery, page));
+    dispatch(
+      getSearchProducts(
+        searchQuery,
+        onSale,
+        freeShip,
+        inStock,
+        productType,
+        categories,
+        minPrice,
+        maxPrice,
+        page
+      )
+    );
   }, [dispatch, query]);
 
   return (
@@ -41,7 +61,7 @@ const ShopSearch = () => {
           <SelectBox />
         </div>
         <div className="shop-sidebar">
-          <FilterSidebar />
+          <FilterSidebar searchQuery={searchQuery} />
         </div>
         <ShopReseults searchQuery={searchQuery} />
       </div>

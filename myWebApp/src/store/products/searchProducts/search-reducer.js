@@ -1,7 +1,7 @@
 import { PRODUCTS_ACTION_TYPES } from "../products-types";
 
 export const PRODUCT_INITIAL_STATE = {
-  searchResults: { pages: 0, result: [], page: 1 },
+  searchResults: { pages: 0, result: [], page: 1, path: "" },
   isLoading: false,
   error: null,
 };

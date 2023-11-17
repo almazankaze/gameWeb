@@ -11,3 +11,8 @@ export const selectIsLoading = createSelector(
   [selectSearchReducer],
   (searchSlice) => searchSlice.isLoading
 );
+
+export const selectPath = createSelector(
+  [selectSearchReducer],
+  (searchSlice) => searchSlice.searchResults.path
+);

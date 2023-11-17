@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Checkbox from "../checkbox/Checkbox";
 import Button from "../button/Button";
 import RadioButtons from "../radio/RadioButtons";
@@ -15,7 +16,7 @@ const initPlatforms = [
 
 const productTypes = ["All", "Accessories", "Consoles", "Games"];
 
-const FilterSidebar = () => {
+const FilterSidebar = ({ searchQuery }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [onSaleChecked, setOnSaleChecked] = useState(false);
   const [freeShipChecked, setFreeShipChecked] = useState(false);
@@ -25,20 +26,25 @@ const FilterSidebar = () => {
   const [maxPrice, setMaxPrice] = useState(10000);
   const productType = useRef(null);
 
+  let navigate = useNavigate();
+
   const handleApplyFilters = () => {
-    console.log(`with discount: ${onSaleChecked}`);
-    console.log(`free shipping: ${freeShipChecked}`);
-    console.log(`in stock: ${inStockChecked}`);
+    let path = "";
+    if (onSaleChecked) path += "&onSale=true";
+    if (freeShipChecked) path += "&freeShip=true";
+    if (inStockChecked) path += "&inStock=true";
+
+    if (productType.current.checked !== "All")
+      path += "&productType=" + productType.current.checked;
 
     platforms.forEach((platform, i) => {
-      console.log(`${initPlatforms[i]}: ${platform}`);
+      if (platform) path += `&categories=${initPlatforms[i]}`;
     });
 
-    console.log(`product type: ${productType.current.checked}`);
+    if (minPrice > 0) path += "&minPrice=" + minPrice;
+    if (maxPrice < 10000) path += "&maxPrice=" + maxPrice;
 
-    //if(isNaN(minPrice) || minPrice <= 0) {setMinPrice()}
-    console.log(`min Price: ${minPrice}`);
-    console.log(`max price: ${maxPrice}`);
+    navigate(`/shop?term=${searchQuery}${path}&page=${1}`);
   };
 
   const handleOnSaleChecked = () => {

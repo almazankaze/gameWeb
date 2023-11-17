@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectPath } from "../../store/products/searchProducts/search-selector";
 
 import "./pagination.scss";
 
@@ -6,8 +8,10 @@ function Pagination({ currentPage, pages, search }) {
   let navigate = useNavigate();
 
   const handleBtn = (number) => {
-    navigate(`/shop?term=${search}&page=${number}`);
+    navigate(`/shop?term=${search}${path}&page=${number}`);
   };
+
+  const path = useSelector(selectPath);
 
   const addBtns = () => {
     let content = [];

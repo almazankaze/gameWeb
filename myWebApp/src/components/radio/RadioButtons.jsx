@@ -22,8 +22,8 @@ const RadioButtons = ({
 
   return (
     <RadioButtonsContainer ref={forwardedRef} checked={checked} {...otherProps}>
-      {buttons.map((button) => (
-        <RadioButtonContainer>
+      {buttons.map((button, index) => (
+        <RadioButtonContainer key={index}>
           <HiddenRadioButton
             name={name}
             value={button}
