@@ -5,6 +5,9 @@ const myUrl = "http://localhost:5000";
 const API = axios.create({ baseURL: myUrl });
 
 export const fetchProduct = (id) => API.get(`/products/${id}`);
+export const postReview = (id, review) =>
+  API.post(`/products/${id}/reviews`, review);
+
 export const fetchSearchProducts = (
   searchTerm,
   onSale,

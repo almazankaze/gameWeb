@@ -218,8 +218,7 @@
   padding: 0 10px;
 }
 .rate:not(:checked) > input {
-  position: absolute;
-  top: -9999px;
+  opacity: 0;
 }
 .rate:not(:checked) > label {
   float: right;
@@ -254,6 +253,11 @@
 
 .comment-section h3 {
   margin-bottom: 1rem;
+}
+
+.alert {
+  padding: 1.5rem;
+  color: var(--secondary-color);
 }
 
 @media (max-width: 900px) {

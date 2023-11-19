@@ -25,3 +25,15 @@ export const getProduct = (id) => {
     }
   };
 };
+
+export const createReview = (id, review) => {
+  return async (dispatch) => {
+    dispatch(fetchProductStart());
+    try {
+      const { data } = await api.postReview(id, review);
+      dispatch(fetchProductSuccess(data));
+    } catch (e) {
+      dispatch(fetchProductFailure(e));
+    }
+  };
+};

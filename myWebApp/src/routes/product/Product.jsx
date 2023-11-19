@@ -212,7 +212,7 @@ const Product = () => {
               reviewBtn ? "show-product-section" : "hide-product-section"
             }
           >
-            <ProductReview />
+            <ProductReview productId={id} />
           </div>
         </div>
       )}

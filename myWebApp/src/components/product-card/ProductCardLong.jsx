@@ -11,7 +11,8 @@ import tempImg from "../../assets/home-images/fire-engage.png";
 import "./product-card-long.scss";
 
 function ProductCardLong({ product }) {
-  const { id, name, price, onSale, percentOff, rating, inStock, img } = product;
+  const { _id, name, price, onSale, percentOff, rating, inStock, img } =
+    product;
 
   const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ function ProductCardLong({ product }) {
   return (
     <div className="card-long">
       <div className="card-image-long">
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${_id}`}>
           <img src={tempImg} alt="product-img" />
         </Link>
         {percentOff ? (
@@ -33,7 +34,7 @@ function ProductCardLong({ product }) {
       </div>
       <div className="card-long-details">
         <div>
-          <Link className="text-link" to={`/products/${id}`}>
+          <Link className="text-link" to={`/products/${_id}`}>
             <h5 className="long-card-desc mb-small overflow-text-2">{name}</h5>
           </Link>
 

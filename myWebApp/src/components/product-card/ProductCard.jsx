@@ -14,7 +14,7 @@ import "./product-card.scss";
 
 function ProductCard({ product }) {
   const {
-    id,
+    _id,
     shortname,
     desc,
     price,
@@ -34,7 +34,7 @@ function ProductCard({ product }) {
   return (
     <div className="card">
       <div className="card-image">
-        <Link to={`/products/${id}`}>
+        <Link to={`/products/${_id}`}>
           <img src={tempImg} alt="product-img" />
         </Link>
         {percentOff ? (
@@ -59,7 +59,7 @@ function ProductCard({ product }) {
             {inStock ? "INSTOCK" : "SOLDOUT"}
           </div>
         </div>
-        <Link className="text-link" to={`/products/${id}`}>
+        <Link className="text-link" to={`/products/${_id}`}>
           <h5 className="overflow-text mb-small">{shortname}</h5>
         </Link>
 
