@@ -2,7 +2,10 @@ import { useState } from "react";
 import Joi from "joi-browser";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/products/singleProduct-actions";
-import { selectIsLoading } from "../../store/products/singleProduct-selector";
+import {
+  selectProduct,
+  selectIsLoading,
+} from "../../store/products/singleProduct-selector";
 import Button from "../../components/button/Button";
 import Comment from "../../components/comment/Comment";
 import ReviewDetails from "../../components/review-details/ReviewDetails";
@@ -45,6 +48,7 @@ function ProductReview({ productId }) {
     const { error } = result;
     if (!error) {
       dispatch(createReview(productId, review));
+      clearState();
     } else {
       const errorData = {};
       for (let item of error.details) {
@@ -87,9 +91,18 @@ function ProductReview({ productId }) {
     });
   };
 
+  const product = useSelector(selectProduct);
+  const isLoading = useSelector(selectIsLoading);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (!product.reviews) return <div className="product-review"></div>;
+
   return (
     <div className="product-review">
-      <ReviewDetails />
+      {!product.reviews.length && !isLoading ? "" : <ReviewDetails />}
       <form autoComplete="off" noValidate className="my-review-form">
         <div className="star-container">
           <h3>Your Rating: </h3>
@@ -171,10 +184,17 @@ function ProductReview({ productId }) {
 
       <div className="comment-section">
         <h3>REVIEWS</h3>
-        <div className="comments-list">
-          <Comment commentInfo={dummyReview} />
-          <Comment commentInfo={dummyReview} />
-        </div>
+
+        {!product.reviews.length && !isLoading ? (
+          <div className="text-center">
+            <h3>No reviews yet. Be the first to leave a review!</h3>
+          </div>
+        ) : (
+          <div className="comments-list">
+            <Comment commentInfo={dummyReview} />
+            <Comment commentInfo={dummyReview} />
+          </div>
+        )}
       </div>
     </div>
   );

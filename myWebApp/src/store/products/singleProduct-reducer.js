@@ -13,10 +13,12 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
     case PRODUCTS_ACTION_TYPES.FETCH_PRODUCT_START:
       return {
         ...state,
+        error: null,
+        product: {},
         isLoading: true,
       };
     case PRODUCTS_ACTION_TYPES.FETCH_PRODUCT_SUCCESS:
-      return { ...state, isLoading: false, product: payload };
+      return { ...state, isLoading: false, product: payload, error: null };
     case PRODUCTS_ACTION_TYPES.FETCH_PRODUCT_FAILED:
       return { ...state, isLoading: false, error: payload };
     default:

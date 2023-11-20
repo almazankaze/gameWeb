@@ -12,7 +12,7 @@ export const BaseButton = styled.button`
   font-size: 1.125rem;
   font-weight: 700;
   text-transform: uppercase;
-  border: none;
+  border: 1px solid var(--secondary-color);
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: 4px;

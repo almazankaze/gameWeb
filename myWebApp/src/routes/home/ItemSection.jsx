@@ -1,7 +1,13 @@
 import { useState } from "react";
-
+import { useSelector } from "react-redux";
+import {
+  selectProducts,
+  selectIsLoading,
+  selectProductError,
+} from "../../store/home/home-selector";
 import SectionHeader from "../../components/section-header/SectionHeader";
 import Slider from "../../components/slider/Slider";
+import Spinner from "../../components/spinner/Spinner";
 import SHOP_DATA from "../../shop-data";
 
 import "./home.scss";
@@ -20,7 +26,11 @@ const ItemComponent = ({ item, isActive, onClick }) => {
 
 const ItemSection = () => {
   const [selected, setSelected] = useState(0);
-  const items = ["New Arrival", "Bestseller", "Special"];
+  const items = ["Special", "Bestseller", "New Arrival"];
+
+  const products = useSelector(selectProducts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectProductError);
 
   return (
     <section className="container">
@@ -39,7 +49,11 @@ const ItemSection = () => {
           })}
         </ul>
       </div>
-      <Slider slides={4} resSlides={3} data={SHOP_DATA} />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Slider slides={4} resSlides={3} data={products} />
+      )}
     </section>
   );
 };

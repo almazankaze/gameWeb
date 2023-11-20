@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem 0.5rem;
 }
 
 .error-text-container {
@@ -23,6 +22,6 @@
   font-size: 1rem;
 }
 
-.error-btns {
-  margin-top: 1rem;
+.error-btns button {
+  margin: 1rem;
 }

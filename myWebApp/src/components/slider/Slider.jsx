@@ -40,7 +40,7 @@ const Slider = ({ slides, resSlides, data }) => {
       className="mySwiper"
     >
       {data.map((card) => (
-        <SwiperSlide key={card.id}>
+        <SwiperSlide key={card._id}>
           <ProductCard product={card} />
         </SwiperSlide>
       ))}

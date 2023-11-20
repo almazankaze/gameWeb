@@ -7,6 +7,7 @@ import About from "./routes/about/About";
 import Cart from "./routes/cart/Cart";
 import Product from "./routes/product/Product";
 import Authentication from "./routes/auth/Authentication";
+import NotFound from "./routes/errors/NotFound";
 
 import Footer from "./components/footer/Footer";
 import ScrollUp from "./components/scrollup/ScrollUp";
@@ -30,6 +31,7 @@ function App() {
             <Route path="cart" element={<Cart />} />
             <Route path="products/:id" element={<Product />} />
             <Route path="auth" element={<Authentication />} />
+            <Route path="notfound" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>
         </Routes>
