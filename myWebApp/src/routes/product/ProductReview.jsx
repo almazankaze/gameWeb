@@ -6,6 +6,7 @@ import {
   selectProduct,
   selectIsLoading,
 } from "../../store/products/singleProduct-selector";
+import { setShowToast } from "../../store/toast/toast-actions";
 import Button from "../../components/button/Button";
 import Comment from "../../components/comment/Comment";
 import ReviewDetails from "../../components/review-details/ReviewDetails";
@@ -47,7 +48,9 @@ function ProductReview({ productId }) {
 
     const { error } = result;
     if (!error) {
-      dispatch(createReview(productId, review));
+      dispatch(createReview(productId, review)).then(() => {
+        dispatch(setShowToast(true, "Succesfully added review"));
+      });
       clearState();
     } else {
       const errorData = {};

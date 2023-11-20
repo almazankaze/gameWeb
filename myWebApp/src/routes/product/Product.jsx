@@ -72,10 +72,9 @@ const Product = () => {
   const error = useSelector(selectProductError);
 
   if (error?.response.data.status >= 500) {
-    navigate("/");
   }
 
-  if (error?.response.data.status >= 400) {
+  if (error?.response.data.status === 404) {
     navigate("/notfound");
   }
 

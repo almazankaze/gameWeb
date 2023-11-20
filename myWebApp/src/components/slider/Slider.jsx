@@ -13,6 +13,8 @@ import "./slider.scss";
 import { Autoplay, Navigation } from "swiper/modules";
 
 const Slider = ({ slides, resSlides, data }) => {
+  if (data?.length === 0)
+    return <div className="text-center">Nothing to display</div>;
   return (
     <Swiper
       spaceBetween={20}

@@ -1,0 +1,3 @@
+export const TOAST_ACTION_TYPES = {
+  SET_SHOW_TOAST: "SET_SHOW_TOAST",
+};

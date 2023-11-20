@@ -13,6 +13,7 @@ import Footer from "./components/footer/Footer";
 import ScrollUp from "./components/scrollup/ScrollUp";
 import Navigation from "./components/navigation/Navigation";
 import ScrollToTop from "./components/scrollup/ScrollToTop";
+import ToastMessage from "./components/toast/ToastMessage";
 
 import "./index.scss";
 
@@ -38,6 +39,7 @@ function App() {
         <div className={isMenuOpen ? "nav-open-background" : ""}></div>
         <Footer />
         <ScrollUp />
+        <ToastMessage />
       </ScrollToTop>
     </>
   );

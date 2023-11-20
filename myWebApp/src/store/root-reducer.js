@@ -5,6 +5,7 @@ import { cartReducer } from "./cart/cart-reducer";
 import { productReducer } from "./products/singleProduct-reducer";
 import { homeReducer } from "./home/home-reducer.js";
 import { searchReducer } from "./products/searchProducts/search-reducer.js";
+import { toastReducer } from "./toast/toast-reducer.js";
 
 export const rootReducer = combineReducers({
   navbar: NavReducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   product: productReducer,
   home: homeReducer,
   search: searchReducer,
+  toast: toastReducer,
 });
