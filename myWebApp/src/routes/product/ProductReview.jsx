@@ -5,6 +5,7 @@ import { createReview } from "../../store/products/singleProduct-actions";
 import {
   selectProduct,
   selectIsLoading,
+  selectProductError,
 } from "../../store/products/singleProduct-selector";
 import { setShowToast } from "../../store/toast/toast-actions";
 import Button from "../../components/button/Button";
@@ -48,8 +49,13 @@ function ProductReview({ productId }) {
 
     const { error } = result;
     if (!error) {
-      dispatch(createReview(productId, review)).then(() => {
-        dispatch(setShowToast(true, "Succesfully added review"));
+      dispatch(createReview(productId, review)).then((resp) => {
+        if (resp) {
+          dispatch(setShowToast(true, "Succesfully added review"));
+        } else
+          dispatch(
+            setShowToast(true, "Could not post review. Try again.", "Failed")
+          );
       });
       clearState();
     } else {
@@ -96,6 +102,7 @@ function ProductReview({ productId }) {
 
   const product = useSelector(selectProduct);
   const isLoading = useSelector(selectIsLoading);
+  const reviewError = useSelector(selectProductError);
 
   if (isLoading) {
     return <Spinner />;

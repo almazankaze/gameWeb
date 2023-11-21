@@ -26,14 +26,27 @@ export const getProduct = (id) => {
   };
 };
 
+// reviews
+export const createReviewStart = () => {
+  return { type: PRODUCTS_ACTION_TYPES.CREATE_REVIEW_START };
+};
+
+export const createReviewSuccess = (review) =>
+  createAction(PRODUCTS_ACTION_TYPES.CREATE_REVIEW_SUCCESS, review);
+
+export const createReviewFailure = (error) =>
+  createAction(PRODUCTS_ACTION_TYPES.CREATE_REVIEW_FAILED, error);
+
 export const createReview = (id, review) => {
   return async (dispatch) => {
-    dispatch(fetchProductStart());
+    dispatch(createReviewStart());
     try {
       const { data } = await api.postReview(id, review);
-      dispatch(fetchProductSuccess(data));
+      dispatch(createReviewSuccess(data));
+      return true;
     } catch (e) {
-      dispatch(fetchProductFailure(e));
+      dispatch(createReviewFailure(e));
+      return false;
     }
   };
 };
