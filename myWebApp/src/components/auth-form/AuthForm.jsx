@@ -1,117 +1,108 @@
 import { useState } from "react";
+import Joi from "joi-browser";
 import { Link, useNavigate } from "react-router-dom";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../../components/button/Button";
 import Checkbox from "../checkbox/Checkbox";
 import Spinner from "../spinner/Spinner";
 
-import { getEmailFragments } from "../../utils/functions/getEmailFragments";
-import { isEmail } from "../../utils/functions/isEmail";
-
 import "./auth-form.scss";
 
-const defaultFormFields = {
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
-
 const AuthForm = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    confirmPassword: "",
+    password: "",
+  });
+
   const [isSignup, setIsSignUp] = useState(false);
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password, confirmPassword } = formFields;
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [confirmError, setConfirmError] = useState("");
-  const [otherError, setOtherError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [otherError, setOtherError] = useState("");
+
+  const schema = {
+    email: Joi.string().email().required(),
+    confirmPassword: Joi.string().required(),
+    password: Joi.string()
+      .regex(
+        /[ -~]*[a-z][ -~]*/,
+        "1 lower case, 1 upper case, 1 number, 1 special character"
+      ) // at least 1 lower-case
+      .regex(
+        /[ -~]*[A-Z][ -~]*/,
+        "1 lower case, 1 upper case, 1 number, 1 special character"
+      ) // at least 1 upper-case
+      .regex(
+        /[ -~]*(?=[ -~])[^0-9a-zA-Z][ -~]*/,
+        "1 lower case, 1 upper case, 1 number, 1 special character"
+      ) // at least 1 special character
+      .regex(
+        /[ -~]*[0-9][ -~]*/,
+        "1 lower case, 1 upper case, 1 number, 1 special character"
+      ) // at least 1 number
+      .min(8)
+      .required(),
+  };
 
   const navigate = useNavigate();
 
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields);
+  const handleSave = (event) => {
+    const { name, value } = event.target;
+    let errorData = { ...errors };
+    delete errorData[name];
+    let data = { ...formData };
+    data[name] = value;
+    setFormData(data);
+    setErrors(errorData);
   };
 
-  const signInWithGoogle = async () => {};
+  const validateProperty = (event) => {
+    const { name, value } = event.target;
+    const obj = { [name]: value };
+    const subSchema = { [name]: schema[name] };
+    const result = Joi.validate(obj, subSchema);
+    const { error } = result;
+    return error ? error.details[0].message : null;
+  };
 
-  const resetFormErrors = () => {
-    setEmailError("");
-    setPasswordError("");
-    setConfirmError("");
-    setOtherError("");
+  const clearState = () => {
+    setFormData({
+      email: "",
+      confirmPassword: "",
+      password: "",
+    });
+
+    setErrors({});
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    resetFormErrors();
+    const result = Joi.validate(formData, schema, {
+      abortEarly: false,
+    });
 
-    if (isSignup) {
-      if (!isEmail(email)) {
-        setEmailError("Invalid email");
-        return;
-      }
+    const { error } = result;
 
-      let strongPassword = new RegExp(
-        "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"
-      );
-
-      if (!strongPassword.test(password)) {
-        setPasswordError(
-          "Password should have at least one lowercase letter, one uppercase letter, one digit, one special character, and is at least eight characters long."
-        );
-      }
-
-      if (password !== confirmPassword) {
-        setConfirmError("Passwords should match");
-        return;
-      }
-
-      setLoading(true);
-
-      try {
-        resetFormFields();
-        setLoading(false);
-      } catch (err) {
-        if (err.code === "auth/email-already-in-use") {
-          setOtherError("User with email already exists");
-        } else {
-          setOtherError("Something went wrong. Please try again");
-        }
-
-        setLoading(false);
-      }
+    if (!error) {
+      clearState();
     } else {
-      setLoading(true);
-      try {
-        resetFormFields();
-        setLoading(false);
-      } catch (err) {
-        switch (err.code) {
-          case "auth/wrong-password":
-            setOtherError("Incorrect email or password");
-            break;
-          case "auth/user-not-found":
-            setOtherError("Incorrect email or password");
-            break;
-          default:
-            setOtherError("Something went wrong. Please try again");
-        }
-        setLoading(false);
+      const errorData = {};
+      for (let item of error.details) {
+        const name = item.path[0];
+        const message = item.message;
+        errorData[name] = message;
       }
+      setErrors(errorData);
+      return errorData;
     }
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormFields({ ...formFields, [name]: value });
-  };
-
   const switchMode = () => {
-    resetFormErrors();
+    clearState();
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
   };
+
   return loading ? (
     <Spinner />
   ) : (
@@ -121,29 +112,39 @@ const AuthForm = () => {
           <input
             type="text"
             name="email"
-            onChange={handleChange}
-            value={email}
+            onChange={handleSave}
+            value={formData.email}
             required
           />
           <span></span>
           <label>Email</label>
         </div>
 
-        <span className="input-error">{emailError}</span>
+        {errors.email && (
+          <div className="input-error">
+            {isSignup
+              ? "must enter valid email format"
+              : "please enter your email"}
+          </div>
+        )}
 
         <div className="form-input">
           <input
             type="password"
             name="password"
-            onChange={handleChange}
-            value={password}
+            onChange={handleSave}
+            value={formData.password}
             required
           />
           <span></span>
           <label>Password</label>
         </div>
 
-        <span className="input-error">{passwordError}</span>
+        {errors.password && (
+          <div className="input-error">
+            {isSignup ? errors.password : "please enter password"}
+          </div>
+        )}
 
         {isSignup && (
           <>
@@ -151,14 +152,17 @@ const AuthForm = () => {
               <input
                 type="password"
                 name="confirmPassword"
-                onChange={handleChange}
-                value={confirmPassword}
+                onChange={handleSave}
+                value={formData.confirmPassword}
                 required
               />
               <span></span>
               <label>Confirm Password</label>
             </div>
-            <span className="input-error">{confirmError}</span>
+
+            {errors.confirmPassword && (
+              <div className="input-error">passwords should match</div>
+            )}
           </>
         )}
 
@@ -182,11 +186,7 @@ const AuthForm = () => {
           <>
             <hr className="form-divider" />
             <p className="or">OR</p>
-            <button
-              type="button"
-              className="form-btn google-btn"
-              onClick={signInWithGoogle}
-            >
+            <button type="button" className="form-btn google-btn">
               Login with Google
             </button>
           </>

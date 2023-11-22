@@ -5,7 +5,6 @@ import { createReview } from "../../store/products/singleProduct-actions";
 import {
   selectProduct,
   selectIsLoading,
-  selectProductError,
 } from "../../store/products/singleProduct-selector";
 import { setShowToast } from "../../store/toast/toast-actions";
 import Button from "../../components/button/Button";
@@ -102,7 +101,6 @@ function ProductReview({ productId }) {
 
   const product = useSelector(selectProduct);
   const isLoading = useSelector(selectIsLoading);
-  const reviewError = useSelector(selectProductError);
 
   if (isLoading) {
     return <Spinner />;
