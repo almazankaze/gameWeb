@@ -29,3 +29,8 @@ export const fetchSearchProducts = (
       maxPrice || 10000
     }&page=${page || 1}`
   );
+
+//user
+export const signIn = (formData) => API.post("/users/login", formData);
+export const signUp = (formData) => API.post("/users/register", formData);
+export const logout = () => API.get("users/logout");

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useState, useEffect, Fragment } from "react";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -11,8 +11,11 @@ import {
   setIsMenuOpen,
   setIsSearchOpen,
 } from "../../store/navbar/navbar-actions";
+import { logout } from "../../store/user/user-actions";
 
 import { selectCartCount } from "../../store/cart/cart-selector";
+
+import { jwtDecode } from "jwt-decode";
 
 import SideBar from "./SideBar";
 import SearchForm from "../search-form/SearchForm";
@@ -31,17 +34,40 @@ import "./navigation.scss";
 
 const Navigation = () => {
   const dispatch = useDispatch();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const isMenuOpen = useSelector(selectIsMenuOpen);
   const isSearchOpen = useSelector(selectIsSearchOpen);
   const cartCount = useSelector(selectCartCount);
   const [isTopPage, setIsTopPage] = useState(true);
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) signMeOut();
+    }
+
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
+
+  const signMeOut = async () => {
+    dispatch(setIsSearchOpen(false));
+    dispatch(setIsMenuOpen(false));
+    dispatch(logout()).then(() => {
+      navigate("/auth");
+      setUser(null);
+    });
+  };
+
   const searchClassNames = classNames({
     "navsearch-show": isSearchOpen,
     navsearch: !isSearchOpen,
   });
-
-  const navigate = useNavigate();
 
   const goToCartHandler = () => {
     navigate("/cart");
@@ -212,9 +238,15 @@ const Navigation = () => {
               <span className="badge"> 0 </span>
             </div>
             <div className="nav-profile-link">
-              <Link className="nav-link" to="/auth">
-                Sign In
-              </Link>
+              {user?.result ? (
+                <div className="nav-link" onClick={signMeOut}>
+                  {user?.result.name}
+                </div>
+              ) : (
+                <Link className="nav-link" to="/auth">
+                  Sign In
+                </Link>
+              )}
             </div>
           </div>
           <div className="mobile-nav-right">

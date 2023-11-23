@@ -16,6 +16,7 @@ import ScrollToTop from "./components/scrollup/ScrollToTop";
 import ToastMessage from "./components/toast/ToastMessage";
 
 import "./index.scss";
+import NavigateAuth from "./routes/auth/NavigateAuth";
 
 function App() {
   const isMenuOpen = useSelector(selectIsMenuOpen);
@@ -31,7 +32,14 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="cart" element={<Cart />} />
             <Route path="products/:id" element={<Product />} />
-            <Route path="auth" element={<Authentication />} />
+            <Route
+              path="auth"
+              element={
+                <NavigateAuth>
+                  <Authentication />
+                </NavigateAuth>
+              }
+            />
             <Route path="notfound" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserError } from "../../store/user/user-selector";
+import { signIn, signUp } from "../../store/user/user-actions";
 import Joi from "joi-browser";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -6,13 +9,21 @@ import Button, { BUTTON_TYPE_CLASSES } from "../../components/button/Button";
 import Checkbox from "../checkbox/Checkbox";
 import Spinner from "../spinner/Spinner";
 
+import { getEmailFragments } from "../../utils/functions/getEmailFragments";
+
 import "./auth-form.scss";
 
 const AuthForm = () => {
   const [formData, setFormData] = useState({
     email: "",
+    username: "",
     confirmPassword: "",
     password: "",
+  });
+
+  const [loginData, setLoginData] = useState({
+    loginEmail: "",
+    loginPassword: "",
   });
 
   const [isSignup, setIsSignUp] = useState(false);
@@ -22,7 +33,11 @@ const AuthForm = () => {
 
   const schema = {
     email: Joi.string().email().required(),
-    confirmPassword: Joi.string().required(),
+    username: Joi.string().optional().allow(""),
+    confirmPassword: Joi.string()
+      .valid(Joi.ref("password"))
+      .label("confirm password")
+      .required(),
     password: Joi.string()
       .regex(
         /[ -~]*[a-z][ -~]*/,
@@ -41,9 +56,16 @@ const AuthForm = () => {
         "1 lower case, 1 upper case, 1 number, 1 special character"
       ) // at least 1 number
       .min(8)
+      .label("password")
       .required(),
   };
 
+  const loginSchema = {
+    loginEmail: Joi.string().email().required(),
+    loginPassword: Joi.string().required(),
+  };
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSave = (event) => {
@@ -56,45 +78,111 @@ const AuthForm = () => {
     setErrors(errorData);
   };
 
-  const validateProperty = (event) => {
+  const handleLoginSave = (event) => {
     const { name, value } = event.target;
-    const obj = { [name]: value };
-    const subSchema = { [name]: schema[name] };
-    const result = Joi.validate(obj, subSchema);
-    const { error } = result;
-    return error ? error.details[0].message : null;
+    let errorData = { ...errors };
+    delete errorData[name];
+    let data = { ...loginData };
+    data[name] = value;
+    setLoginData(data);
+    setErrors(errorData);
   };
 
   const clearState = () => {
     setFormData({
       email: "",
+      username: "",
       confirmPassword: "",
       password: "",
     });
 
+    setLoginData({
+      loginEmail: "",
+      loginPassword: "",
+    });
+
     setErrors({});
+    setOtherError("");
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const result = Joi.validate(formData, schema, {
-      abortEarly: false,
-    });
+    // handle signup
+    if (isSignup) {
+      const result = Joi.validate(formData, schema, {
+        abortEarly: false,
+      });
 
-    const { error } = result;
+      const { error } = result;
 
-    if (!error) {
-      clearState();
-    } else {
-      const errorData = {};
-      for (let item of error.details) {
-        const name = item.path[0];
-        const message = item.message;
-        errorData[name] = message;
+      if (!error) {
+        setLoading(true);
+        const [displayName, domain] = getEmailFragments(formData.email);
+
+        dispatch(signUp({ ...formData, username: displayName })).then(
+          (resp) => {
+            if (resp === 409) {
+              setOtherError("user already exists");
+            } else if (resp >= 500)
+              setOtherError("something went wrong. Try again.");
+            else {
+              navigate(0);
+              clearState();
+            }
+            setLoading(false);
+          }
+        );
+      } else {
+        const errorData = {};
+        for (let item of error.details) {
+          const name = item.path[0];
+          const message = item.message;
+          errorData[name] = message;
+        }
+        setErrors(errorData);
+        return errorData;
       }
-      setErrors(errorData);
-      return errorData;
+    }
+
+    // handle login
+    else {
+      const result = Joi.validate(loginData, loginSchema, {
+        abortEarly: false,
+      });
+
+      const { error } = result;
+
+      if (!error) {
+        setLoading(true);
+        const [displayName, domain] = getEmailFragments(loginData.loginEmail);
+
+        const loginInfo = {
+          username: displayName,
+          password: loginData.loginPassword,
+        };
+
+        dispatch(signIn(loginInfo)).then((resp) => {
+          if (resp >= 500) {
+            setOtherError("Something went wrong. Try again.");
+          } else if (resp >= 400) {
+            setOtherError("Incorrect email or password");
+          } else {
+            navigate(0);
+            clearState();
+          }
+          setLoading(false);
+        });
+      } else {
+        const errorData = {};
+        for (let item of error.details) {
+          const name = item.path[0];
+          const message = item.message;
+          errorData[name] = message;
+        }
+        setErrors(errorData);
+        return errorData;
+      }
     }
   };
 
@@ -103,51 +191,82 @@ const AuthForm = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
   };
 
+  const error = useSelector(selectUserError);
+
   return loading ? (
     <Spinner />
   ) : (
     <div className="form-container">
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <div className="form-input">
-          <input
-            type="text"
-            name="email"
-            onChange={handleSave}
-            value={formData.email}
-            required
-          />
-          <span></span>
-          <label>Email</label>
-        </div>
+        {!isSignup && (
+          <>
+            <div className="form-input">
+              <input
+                type="text"
+                name="loginEmail"
+                onChange={handleLoginSave}
+                value={loginData.loginEmail}
+                required
+              />
+              <span></span>
+              <label>Email</label>
+            </div>
 
-        {errors.email && (
-          <div className="input-error">
-            {isSignup
-              ? "must enter valid email format"
-              : "please enter your email"}
-          </div>
-        )}
+            {errors.loginEmail && (
+              <div className="input-error">"must enter valid email format"</div>
+            )}
 
-        <div className="form-input">
-          <input
-            type="password"
-            name="password"
-            onChange={handleSave}
-            value={formData.password}
-            required
-          />
-          <span></span>
-          <label>Password</label>
-        </div>
+            <div className="form-input">
+              <input
+                type="password"
+                name="loginPassword"
+                onChange={handleLoginSave}
+                value={loginData.loginPassword}
+                required
+              />
+              <span></span>
+              <label>Password</label>
+            </div>
 
-        {errors.password && (
-          <div className="input-error">
-            {isSignup ? errors.password : "please enter password"}
-          </div>
+            {errors.loginPassword && (
+              <div className="input-error">please enter password</div>
+            )}
+          </>
         )}
 
         {isSignup && (
           <>
+            <div className="form-input">
+              <input
+                type="text"
+                name="email"
+                onChange={handleSave}
+                value={formData.email}
+                required
+              />
+              <span></span>
+              <label>Email</label>
+            </div>
+
+            {errors.email && (
+              <div className="input-error">must enter valid email format</div>
+            )}
+
+            <div className="form-input">
+              <input
+                type="password"
+                name="password"
+                onChange={handleSave}
+                value={formData.password}
+                required
+              />
+              <span></span>
+              <label>Password</label>
+            </div>
+
+            {errors.password && (
+              <div className="input-error">{errors.password}</div>
+            )}
             <div className="form-input">
               <input
                 type="password"
