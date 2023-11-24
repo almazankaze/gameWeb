@@ -37,11 +37,11 @@ export const createReviewSuccess = (review) =>
 export const createReviewFailure = (error) =>
   createAction(PRODUCTS_ACTION_TYPES.CREATE_REVIEW_FAILED, error);
 
-export const createReview = (id, review) => {
+export const createReview = (id, review, token) => {
   return async (dispatch) => {
     dispatch(createReviewStart());
     try {
-      const { data } = await api.postReview(id, review);
+      const { data } = await api.postReview(id, review, token);
       dispatch(createReviewSuccess(data));
       return true;
     } catch (e) {

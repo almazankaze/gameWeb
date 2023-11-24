@@ -1,7 +1,7 @@
 import { USER_ACTION_TYPES } from "./user-types";
 
 const USER_INITIAL_DATA = {
-  userData: null,
+  userData: {},
   isLoading: false,
   error: null,
 };
@@ -13,7 +13,7 @@ export const userReducer = (state = USER_INITIAL_DATA, action = {}) => {
     case USER_ACTION_TYPES.USER_START:
       return {
         ...state,
-        userData: null,
+        userData: {},
         isLoading: true,
         error: null,
       };
@@ -21,7 +21,7 @@ export const userReducer = (state = USER_INITIAL_DATA, action = {}) => {
       localStorage.setItem("profile", JSON.stringify(payload));
       return {
         ...state,
-        userData: payload,
+        userData: {},
         isLoading: false,
         error: null,
       };
@@ -37,7 +37,7 @@ export const userReducer = (state = USER_INITIAL_DATA, action = {}) => {
       localStorage.clear();
       return {
         ...state,
-        userData: null,
+        userData: {},
         isLoading: false,
         error: null,
       };

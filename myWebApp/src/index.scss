@@ -200,12 +200,16 @@ h1 {
 }
 
 .secondary-color {
-  color: var(--secondary-color);
+  color: var(--secondary-color) !important;
 }
 
 .text-link {
   text-decoration: none;
   color: var(--white);
+}
+
+.text-bold {
+  font-weight: bold;
 }
 
 .text-center {

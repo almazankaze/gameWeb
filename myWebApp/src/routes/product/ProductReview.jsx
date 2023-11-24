@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Joi from "joi-browser";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/products/singleProduct-actions";
@@ -13,6 +14,7 @@ import ReviewDetails from "../../components/review-details/ReviewDetails";
 import Spinner from "../../components/spinner/Spinner";
 
 function ProductReview({ productId }) {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [reviewData, setReviewData] = useState({
     rating: 0,
     body: "",
@@ -48,15 +50,15 @@ function ProductReview({ productId }) {
 
     const { error } = result;
     if (!error) {
-      dispatch(createReview(productId, review)).then((resp) => {
+      dispatch(createReview(productId, review, user?.token)).then((resp) => {
         if (resp) {
           dispatch(setShowToast(true, "Succesfully added review"));
+          clearState();
         } else
           dispatch(
             setShowToast(true, "Could not post review. Try again.", "Failed")
           );
       });
-      clearState();
     } else {
       const errorData = {};
       for (let item of error.details) {
@@ -111,84 +113,95 @@ function ProductReview({ productId }) {
   return (
     <div className="product-review">
       {!product.reviews.length && !isLoading ? "" : <ReviewDetails />}
-      <form autoComplete="off" noValidate className="my-review-form">
-        <div className="star-container">
-          <h3>Your Rating: </h3>
-          <div className="rate">
-            <input
-              type="radio"
-              id="star5"
-              name="rating"
-              value="5"
-              onClick={handleSave}
-            />
-            <label htmlFor="star5" title="5/5">
-              5 stars
-            </label>
-            <input
-              type="radio"
-              id="star4"
-              name="rating"
-              value="4"
-              onClick={handleSave}
-            />
-            <label htmlFor="star4" title="4/5">
-              4 stars
-            </label>
-            <input
-              type="radio"
-              id="star3"
-              name="rating"
-              value="3"
-              onClick={handleSave}
-            />
-            <label htmlFor="star3" title="3/5">
-              3 stars
-            </label>
-            <input
-              type="radio"
-              id="star2"
-              name="rating"
-              value="2"
-              onClick={handleSave}
-            />
-            <label htmlFor="star2" title="2/5">
-              2 stars
-            </label>
-            <input
-              type="radio"
-              id="star1"
-              name="rating"
-              value="1"
-              onClick={handleSave}
-            />
-            <label htmlFor="star1" title="1/5">
-              1 star
-            </label>
+
+      {user?.result ? (
+        <form autoComplete="off" noValidate className="my-review-form">
+          <div className="star-container">
+            <h3>Your Rating: </h3>
+            <div className="rate">
+              <input
+                type="radio"
+                id="star5"
+                name="rating"
+                value="5"
+                onClick={handleSave}
+              />
+              <label htmlFor="star5" title="5/5">
+                5 stars
+              </label>
+              <input
+                type="radio"
+                id="star4"
+                name="rating"
+                value="4"
+                onClick={handleSave}
+              />
+              <label htmlFor="star4" title="4/5">
+                4 stars
+              </label>
+              <input
+                type="radio"
+                id="star3"
+                name="rating"
+                value="3"
+                onClick={handleSave}
+              />
+              <label htmlFor="star3" title="3/5">
+                3 stars
+              </label>
+              <input
+                type="radio"
+                id="star2"
+                name="rating"
+                value="2"
+                onClick={handleSave}
+              />
+              <label htmlFor="star2" title="2/5">
+                2 stars
+              </label>
+              <input
+                type="radio"
+                id="star1"
+                name="rating"
+                value="1"
+                onClick={handleSave}
+              />
+              <label htmlFor="star1" title="1/5">
+                1 star
+              </label>
+            </div>
+            {errors.rating && (
+              <div className="alert alert-danger">
+                Please rate between 1 and 5 stars
+              </div>
+            )}
           </div>
-          {errors.rating && (
+          <textarea
+            className="comment-box"
+            name="body"
+            placeholder="Add a comment..."
+            value={reviewData.body}
+            onChange={handleSave}
+          ></textarea>
+          {errors.body && (
             <div className="alert alert-danger">
-              Please rate between 1 and 5 stars
+              Comment Box is not allowed to be empty
             </div>
           )}
-        </div>
-        <textarea
-          className="comment-box"
-          name="body"
-          placeholder="Add a comment..."
-          value={reviewData.body}
-          onChange={handleSave}
-        ></textarea>
-        {errors.body && (
-          <div className="alert alert-danger">
-            Comment Box is not allowed to be empty
-          </div>
-        )}
 
-        <Button type="button" onClick={handleSubmit}>
-          Add Review
-        </Button>
-      </form>
+          <Button type="button" onClick={handleSubmit}>
+            Add Review
+          </Button>
+        </form>
+      ) : (
+        <div className="text-center">
+          please{" "}
+          <Link className="secondary-color text-link text-bold" to="/auth">
+            LOGIN
+          </Link>{" "}
+          to review
+        </div>
+      )}
 
       <div className="comment-section">
         <h3>REVIEWS</h3>
@@ -199,8 +212,9 @@ function ProductReview({ productId }) {
           </div>
         ) : (
           <div className="comments-list">
-            <Comment commentInfo={dummyReview} />
-            <Comment commentInfo={dummyReview} />
+            {product.reviews.map((review) => (
+              <Comment key={review._id} commentInfo={review} />
+            ))}
           </div>
         )}
       </div>
