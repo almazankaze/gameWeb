@@ -11,3 +11,8 @@ export const selectIsSearchOpen = createSelector(
   [selectNavbarReducer],
   (nav) => nav.isSearchOpen
 );
+
+export const selectNavPath = createSelector(
+  [selectNavbarReducer],
+  (nav) => nav.path
+);

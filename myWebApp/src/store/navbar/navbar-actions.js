@@ -6,3 +6,9 @@ export const setIsMenuOpen = (boolean) =>
 
 export const setIsSearchOpen = (boolean) =>
   createAction(NAV_ACTION_TYPES.SET_IS_MOBILE_SEARCH_OPEN, boolean);
+
+export const setNavPath = (currentPath, prevPath) =>
+  createAction(NAV_ACTION_TYPES.SET_NAV_PATH, {
+    prev: prevPath,
+    current: currentPath,
+  });

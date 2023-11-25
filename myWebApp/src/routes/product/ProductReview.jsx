@@ -194,7 +194,7 @@ function ProductReview({ productId }) {
           </Button>
         </form>
       ) : (
-        <div className="text-center">
+        <div className="text-center login-message">
           please{" "}
           <Link className="secondary-color text-link text-bold" to="/auth">
             LOGIN

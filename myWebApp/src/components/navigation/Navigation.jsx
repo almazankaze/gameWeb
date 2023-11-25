@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsMenuOpen,
   selectIsSearchOpen,
+  selectNavPath,
 } from "../../store/navbar/navbar-selector";
 import {
   setIsMenuOpen,
   setIsSearchOpen,
+  setNavPath,
 } from "../../store/navbar/navbar-actions";
 import { logout } from "../../store/user/user-actions";
 
@@ -42,9 +44,13 @@ const Navigation = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const prevPath = useSelector(selectNavPath);
 
   useEffect(() => {
     const token = user?.token;
+    const currentPath = location.pathname + location.search;
+
+    dispatch(setNavPath(currentPath, prevPath.current));
 
     if (token) {
       const decodedToken = jwtDecode(token);

@@ -255,6 +255,15 @@
   margin-bottom: 1rem;
 }
 
+.comments-list {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.login-message {
+  margin-top: 3rem;
+}
+
 .alert {
   padding: 1.5rem;
   color: var(--secondary-color);
