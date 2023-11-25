@@ -6,7 +6,7 @@ const NavigateAuth = ({ children }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const path = useSelector(selectNavPath);
 
-  return user ? <Navigate to="/" /> : children;
+  return user ? <Navigate to="/" replace /> : children;
 };
 
 export default NavigateAuth;

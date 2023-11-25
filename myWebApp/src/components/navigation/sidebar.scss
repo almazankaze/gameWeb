@@ -18,6 +18,13 @@
   padding: 0.75rem 1.25rem;
 }
 
+.sidebar-profile {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
 .side-link {
   text-decoration: none;
   color: var(--white);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserError } from "../../store/user/user-selector";
+import { selectNavPath } from "../../store/navbar/navbar-selector";
 import { signIn, signUp } from "../../store/user/user-actions";
 import Joi from "joi-browser";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,6 +31,8 @@ const AuthForm = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [otherError, setOtherError] = useState("");
+
+  const path = useSelector(selectNavPath);
 
   const schema = {
     email: Joi.string().email().required(),
@@ -127,7 +130,7 @@ const AuthForm = () => {
             } else if (resp >= 500)
               setOtherError("something went wrong. Try again.");
             else {
-              navigate(0);
+              navigate(path.prev, { replace: true });
               clearState();
             }
             setLoading(false);
@@ -168,7 +171,7 @@ const AuthForm = () => {
           } else if (resp >= 400) {
             setOtherError("Incorrect email or password");
           } else {
-            navigate(0);
+            navigate(path.prev, { replace: true });
             clearState();
           }
           setLoading(false);

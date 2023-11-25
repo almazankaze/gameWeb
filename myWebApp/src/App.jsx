@@ -32,14 +32,7 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="cart" element={<Cart />} />
             <Route path="products/:id" element={<Product />} />
-            <Route
-              path="auth"
-              element={
-                <NavigateAuth>
-                  <Authentication />
-                </NavigateAuth>
-              }
-            />
+            <Route path="auth" element={<Authentication />} />
             <Route path="notfound" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Route>

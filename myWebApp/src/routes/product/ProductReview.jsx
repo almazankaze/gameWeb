@@ -26,14 +26,6 @@ function ProductReview({ productId }) {
     body: Joi.string().required(),
   };
 
-  const dummyReview = {
-    name: "Bryan Alvarez",
-    rate: 4,
-    date: "January 10, 2023",
-    review:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quaerat autem neque provident cumque quis vitae earum voluptas, molestiae dolores tenetur accusamus assumenda sunt illum corporis cupiditate amet doloremque mollitia?",
-  };
-
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {

@@ -51,6 +51,7 @@ const Navigation = () => {
     const currentPath = location.pathname + location.search;
 
     dispatch(setNavPath(currentPath, prevPath.current));
+    dispatch(setIsSearchOpen(false));
 
     if (token) {
       const decodedToken = jwtDecode(token);
@@ -265,7 +266,7 @@ const Navigation = () => {
         </div>
       </div>
 
-      <SideBar />
+      <SideBar user={user} signout={signMeOut} />
       <Outlet />
     </Fragment>
   );
