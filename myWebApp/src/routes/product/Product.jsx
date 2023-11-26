@@ -20,10 +20,10 @@ import Spinner from "../../components/spinner/Spinner";
 import currency from "currency.js";
 
 const testImages = [
-  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700977059/testWeb/mbpywpk4ssomkf8q9mtu.png",
-  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972187/testWeb/uvzingjjudbnlzpayhft.jpg",
-  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972186/testWeb/kjbjxhabhogsim6wcqjn.jpg",
-  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972187/testWeb/nobslbizeymqilovq4nv.jpg",
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972183/testWeb/nd4ce5dpljajjj4tkb3b.jpg",
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972183/testWeb/nd4ce5dpljajjj4tkb3b.jpg",
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972183/testWeb/ta864p6mmgeozzhkui8b.jpg",
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972127/testWeb/ftchzl7frtiiffaewtrh.jpg",
 ];
 
 import "./product.scss";
@@ -106,7 +106,13 @@ const Product = () => {
       <div className="product-page-container">
         <div className="product-control-container">
           <div className="product-image-controller">
-            <ImageZoom zoomImg={testImages[currentImg]} />
+            <ImageZoom
+              zoomImg={
+                product.img.length === 0
+                  ? testImages[currentImg]
+                  : product.img[currentImg]
+              }
+            />
             <div className="product-small-images">
               <div
                 className={
@@ -116,7 +122,9 @@ const Product = () => {
                 }
               >
                 <img
-                  src={testImages[0]}
+                  src={
+                    product.img.length === 0 ? testImages[0] : product.img[0]
+                  }
                   alt="small"
                   onClick={() => toggleImage(0)}
                 />
@@ -129,7 +137,7 @@ const Product = () => {
                 }
               >
                 <img
-                  src={testImages[1]}
+                  src={product.img.length <= 1 ? testImages[1] : product.img[1]}
                   alt="small"
                   onClick={() => toggleImage(1)}
                 />
@@ -142,7 +150,7 @@ const Product = () => {
                 }
               >
                 <img
-                  src={testImages[2]}
+                  src={product.img.length <= 2 ? testImages[2] : product.img[2]}
                   alt="small"
                   onClick={() => toggleImage(2)}
                 />
@@ -155,7 +163,7 @@ const Product = () => {
                 }
               >
                 <img
-                  src={testImages[3]}
+                  src={product.img.length <= 3 ? testImages[3] : product.img[3]}
                   alt="small"
                   onClick={() => toggleImage(3)}
                 />

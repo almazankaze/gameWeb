@@ -6,13 +6,22 @@ import StarReview from "../star-review/StarReview";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
 import currency from "currency.js";
 
-import tempImg from "../../assets/home-images/fire-engage.png";
+import tempImg from "../../assets/home-images/placeholder.jpg";
 
 import "./product-card-long.scss";
 
 function ProductCardLong({ product }) {
-  const { _id, name, price, onSale, percentOff, rating, inStock, img } =
-    product;
+  const {
+    _id,
+    name,
+    shortname,
+    price,
+    onSale,
+    percentOff,
+    rating,
+    inStock,
+    img,
+  } = product;
 
   const dispatch = useDispatch();
 
@@ -24,7 +33,7 @@ function ProductCardLong({ product }) {
     <div className="card-long">
       <div className="card-image-long">
         <Link to={`/products/${_id}`}>
-          <img src={tempImg} alt="product-img" />
+          <img src={img[0] === null ? tempImg : img[0]} alt="product-img" />
         </Link>
         {percentOff ? (
           <div className="card-percent">{percentOff}% OFF</div>
@@ -34,8 +43,13 @@ function ProductCardLong({ product }) {
       </div>
       <div className="card-long-details">
         <div>
-          <Link className="text-link" to={`/products/${_id}`}>
+          <Link className="long-desc-link text-link" to={`/products/${_id}`}>
             <h5 className="long-card-desc mb-small overflow-text-2">{name}</h5>
+          </Link>
+          <Link className="short-desc-link text-link" to={`/products/${_id}`}>
+            <h5 className="long-card-desc mb-small overflow-text-2">
+              {shortname}
+            </h5>
           </Link>
 
           <div className="card-bonus-details">

@@ -6,7 +6,7 @@ import RadioButtons from "../radio/RadioButtons";
 import "./filter-sidebar.scss";
 
 const initPlatforms = [
-  "Playstation 5",
+  "Playstation",
   "Xbox",
   "Nintendo Switch",
   "PC",

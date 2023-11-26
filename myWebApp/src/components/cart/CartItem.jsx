@@ -9,12 +9,12 @@ import {
 import { selectCartItems } from "../../store/cart/cart-selector";
 import currency from "currency.js";
 
-import tempImg from "../../assets/home-images/fire-engage.png";
+import tempImg from "../../assets/home-images/placeholder.jpg";
 
 import "./cart.scss";
 
 const CartItem = ({ cartItem }) => {
-  const { id, shortname, img, oprice, dprice, quantity } = cartItem;
+  const { id, shortname, img, onSale, price, quantity } = cartItem;
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
 
@@ -28,13 +28,15 @@ const CartItem = ({ cartItem }) => {
     <div className="cart-item-container">
       <div className="image-container">
         <Link to={`/product/${id}`}>
-          <img src={tempImg} alt={shortname} />
+          <img src={img[0] === null ? tempImg : img[0]} alt={shortname} />
         </Link>
 
         <span className="name"> {shortname} </span>
       </div>
       <span className="price">
-        {dprice ? currency(dprice).format() : currency(oprice).format()}
+        {onSale
+          ? currency(price.current).format()
+          : currency(price.original).format()}
       </span>
       <span className="quantity">
         <div className="arrow" onClick={removeItemHandler}>

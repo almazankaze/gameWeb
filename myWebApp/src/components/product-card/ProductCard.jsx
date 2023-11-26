@@ -8,7 +8,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
 import currency from "currency.js";
 
-import tempImg from "../../assets/home-images/fire-engage.png";
+import tempImg from "../../assets/home-images/placeholder.jpg";
 
 import "./product-card.scss";
 
@@ -35,7 +35,7 @@ function ProductCard({ product }) {
     <div className="card">
       <div className="card-image">
         <Link to={`/products/${_id}`}>
-          <img src={tempImg} alt="product-img" />
+          <img src={img[0] === null ? tempImg : img[0]} alt="product-img" />
         </Link>
         {percentOff ? (
           <div className="card-percent">{percentOff}% OFF</div>

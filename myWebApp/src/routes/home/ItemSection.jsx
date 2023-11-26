@@ -8,7 +8,6 @@ import {
 import SectionHeader from "../../components/section-header/SectionHeader";
 import Slider from "../../components/slider/Slider";
 import Spinner from "../../components/spinner/Spinner";
-import SHOP_DATA from "../../shop-data";
 
 import "./home.scss";
 
