@@ -23,7 +23,7 @@ export const ZoomImage = styled.figure`
     opacity: 0;
   }
 
-  @media (max-width: 980px) {
+  @media (max-width: 760px) {
     width: ${(props) => props.width - 100}px;
     height: ${(props) => props.width - 100}px;
   }
@@ -33,7 +33,7 @@ export const ZoomImage = styled.figure`
     height: ${(props) => props.width - 150}px;
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 350px) {
     width: ${(props) => props.width - 250}px;
     height: ${(props) => props.width - 250}px;
   }

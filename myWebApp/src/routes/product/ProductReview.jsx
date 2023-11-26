@@ -107,7 +107,12 @@ function ProductReview({ productId }) {
       {!product.reviews.length && !isLoading ? "" : <ReviewDetails />}
 
       {user?.result ? (
-        <form autoComplete="off" noValidate className="my-review-form">
+        <form
+          autoComplete="off"
+          noValidate
+          className="my-review-form"
+          id="my-review-form"
+        >
           <div className="star-container">
             <h3>Your Rating: </h3>
             <div className="rate">

@@ -18,7 +18,13 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Spinner from "../../components/spinner/Spinner";
 
 import currency from "currency.js";
-import tempImg from "../../assets/home-images/fire-engage.png";
+
+const testImages = [
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700977059/testWeb/mbpywpk4ssomkf8q9mtu.png",
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972187/testWeb/uvzingjjudbnlzpayhft.jpg",
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972186/testWeb/kjbjxhabhogsim6wcqjn.jpg",
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1700972187/testWeb/nobslbizeymqilovq4nv.jpg",
+];
 
 import "./product.scss";
 
@@ -34,6 +40,10 @@ const Product = () => {
   const [currentImg, setCurrentImg] = useState(0);
 
   let navigate = useNavigate();
+
+  const toggleImage = (index) => {
+    setCurrentImg(index);
+  };
 
   const toggleDetailsBtn = () => {
     if (!detailsBtn) {
@@ -96,19 +106,59 @@ const Product = () => {
       <div className="product-page-container">
         <div className="product-control-container">
           <div className="product-image-controller">
-            <ImageZoom zoomImg={tempImg} />
+            <ImageZoom zoomImg={testImages[currentImg]} />
             <div className="product-small-images">
-              <div className="small-image-container">
-                <img src={tempImg} alt="small" />
+              <div
+                className={
+                  currentImg === 0
+                    ? "small-image-active small-image-container"
+                    : "small-image-container"
+                }
+              >
+                <img
+                  src={testImages[0]}
+                  alt="small"
+                  onClick={() => toggleImage(0)}
+                />
               </div>
-              <div className="small-image-container">
-                <img src={tempImg} alt="small" />
+              <div
+                className={
+                  currentImg === 1
+                    ? "small-image-active small-image-container"
+                    : "small-image-container"
+                }
+              >
+                <img
+                  src={testImages[1]}
+                  alt="small"
+                  onClick={() => toggleImage(1)}
+                />
               </div>
-              <div className="small-image-container">
-                <img src={tempImg} alt="small" />
+              <div
+                className={
+                  currentImg === 2
+                    ? "small-image-active small-image-container"
+                    : "small-image-container"
+                }
+              >
+                <img
+                  src={testImages[2]}
+                  alt="small"
+                  onClick={() => toggleImage(2)}
+                />
               </div>
-              <div className="small-image-container">
-                <img src={tempImg} alt="small" />
+              <div
+                className={
+                  currentImg === 3
+                    ? "small-image-active small-image-container"
+                    : "small-image-container"
+                }
+              >
+                <img
+                  src={testImages[3]}
+                  alt="small"
+                  onClick={() => toggleImage(3)}
+                />
               </div>
             </div>
           </div>
@@ -158,6 +208,7 @@ const Product = () => {
                   &mdash;
                 </button>
                 <input
+                  id="product-quantity-input"
                   className="quantity-input-screen"
                   type="number"
                   value={quantity}
