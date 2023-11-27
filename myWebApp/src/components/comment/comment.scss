@@ -8,14 +8,26 @@
 
 .author {
   display: flex;
+  justify-content: space-between;
+}
+
+.author-info {
+  display: flex;
   align-items: center;
 }
 
-.author img {
+.author-info img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 12px;
+}
+
+.comment-remove {
+  height: max-content;
+  font-size: 0.825rem;
+  color: var(--secondary-color);
+  cursor: pointer;
 }
 
 .author-rating {

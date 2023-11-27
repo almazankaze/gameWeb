@@ -13,6 +13,7 @@ import {
   setIsSearchOpen,
   setNavPath,
 } from "../../store/navbar/navbar-actions";
+import { setIsModalOpen } from "../../store/modal/modal-actions";
 import { logout } from "../../store/user/user-actions";
 
 import { selectCartCount } from "../../store/cart/cart-selector";
@@ -52,6 +53,7 @@ const Navigation = () => {
 
     dispatch(setNavPath(currentPath, prevPath.current));
     dispatch(setIsSearchOpen(false));
+    dispatch(setIsModalOpen(false));
 
     if (token) {
       const decodedToken = jwtDecode(token);

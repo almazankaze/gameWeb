@@ -1,3 +1,7 @@
+import { setIsModalOpen } from "../../store/modal/modal-actions";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsModalOpen } from "../../store/modal/modal-selector";
+
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
 import {
   BaseModal,
@@ -18,11 +22,16 @@ const getModal = (modalType = MODAL_TYPE_CLASSES.base) =>
 
 const Modal = ({ children, modalType, isLoading = false, ...otherProps }) => {
   const CustomModal = getModal(modalType);
+  const dispatch = useDispatch();
 
-  const closeModal = () => {};
+  const isOpen = useSelector(selectIsModalOpen);
+
+  const closeModal = () => {
+    dispatch(setIsModalOpen(false));
+  };
 
   return (
-    <ModalContainer>
+    <ModalContainer className={isOpen ? "show-modal" : ""}>
       <CustomModal disabled={isLoading} {...otherProps}>
         {isLoading ? (
           <ModalSpinner />
