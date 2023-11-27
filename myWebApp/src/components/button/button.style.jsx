@@ -117,6 +117,15 @@ export const SwitchButton = styled(ClearButton)`
   }
 `;
 
+export const DangerButton = styled(CartButton)`
+  background-color: var(--error);
+  border: 1px solid var(--error);
+  &:hover {
+    background-color: transparent;
+    color: var(--white);
+  }
+`;
+
 export const LoadingSpinner = styled.div`
   display: inline-block;
   width: 30px;

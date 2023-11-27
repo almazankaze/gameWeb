@@ -6,6 +6,7 @@ import {
   DetailButton,
   ClearButton,
   SwitchButton,
+  DangerButton,
   LoadingSpinner,
 } from "./button.style";
 
@@ -17,6 +18,7 @@ export const BUTTON_TYPE_CLASSES = {
   detail: "detail-btn",
   clear: "clear-btn",
   switch: "switch-btn",
+  danger: "danger-btn",
 };
 
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
@@ -28,6 +30,7 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
     [BUTTON_TYPE_CLASSES.detail]: DetailButton,
     [BUTTON_TYPE_CLASSES.clear]: ClearButton,
     [BUTTON_TYPE_CLASSES.switch]: SwitchButton,
+    [BUTTON_TYPE_CLASSES.danger]: DangerButton,
   }[buttonType]);
 
 const Button = ({ children, buttonType, isLoading = false, ...otherProps }) => {

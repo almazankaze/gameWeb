@@ -14,6 +14,7 @@ import ScrollUp from "./components/scrollup/ScrollUp";
 import Navigation from "./components/navigation/Navigation";
 import ScrollToTop from "./components/scrollup/ScrollToTop";
 import ToastMessage from "./components/toast/ToastMessage";
+import Modal from "./components/modal/Modal";
 
 import "./index.scss";
 import NavigateAuth from "./routes/auth/NavigateAuth";
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       <ScrollToTop>
+        <Modal />
         <Navigation />
         <Routes>
           <Route path="/" element={<Navigation />}>
