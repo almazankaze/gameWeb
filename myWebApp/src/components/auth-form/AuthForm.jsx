@@ -308,9 +308,13 @@ const AuthForm = () => {
           <>
             <hr className="form-divider" />
             <p className="or">OR</p>
-            <button type="button" className="form-btn google-btn">
-              Login with Google
-            </button>
+            <Button
+              type="button"
+              buttonType={BUTTON_TYPE_CLASSES.google}
+              className="full-btn"
+            >
+              <span>Google</span>
+            </Button>
           </>
         )}
 

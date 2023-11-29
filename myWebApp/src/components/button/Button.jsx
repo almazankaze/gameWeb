@@ -7,6 +7,7 @@ import {
   ClearButton,
   SwitchButton,
   DangerButton,
+  GoogleButton,
   LoadingSpinner,
 } from "./button.style";
 
@@ -18,8 +19,11 @@ export const BUTTON_TYPE_CLASSES = {
   detail: "detail-btn",
   clear: "clear-btn",
   switch: "switch-btn",
+  google: "google-btn",
   danger: "danger-btn",
 };
+
+import googleIcon from "../../assets/home-images/google.png";
 
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
   ({
@@ -31,13 +35,23 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
     [BUTTON_TYPE_CLASSES.clear]: ClearButton,
     [BUTTON_TYPE_CLASSES.switch]: SwitchButton,
     [BUTTON_TYPE_CLASSES.danger]: DangerButton,
+    [BUTTON_TYPE_CLASSES.google]: GoogleButton,
   }[buttonType]);
 
 const Button = ({ children, buttonType, isLoading = false, ...otherProps }) => {
   const CustomButton = getButton(buttonType);
   return (
     <CustomButton disabled={isLoading} {...otherProps}>
-      {isLoading ? <LoadingSpinner /> : children}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {buttonType === BUTTON_TYPE_CLASSES.google && (
+            <img src={googleIcon} alt="google"></img>
+          )}{" "}
+          {children}
+        </>
+      )}
     </CustomButton>
   );
 };

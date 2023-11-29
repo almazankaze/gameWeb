@@ -46,6 +46,7 @@ export const FormButton = styled(BaseButton)`
   border-radius: 1.25rem;
   font-size: 1rem;
   width: 100%;
+  text-transform: none;
 
   &:hover {
     background-color: var(--secondary-color);
@@ -123,6 +124,30 @@ export const DangerButton = styled(CartButton)`
   &:hover {
     background-color: transparent;
     color: var(--white);
+  }
+`;
+
+export const GoogleButton = styled(BaseButton)`
+  margin: 0.625rem 0;
+  background-color: var(--gray-100);
+  color: var(--gray-600);
+  font-size: 1rem;
+  text-transform: none;
+  border: 1px solid var(--gray-100);
+  box-shadow: none;
+
+  > img {
+    width: 25px;
+    height: 25px;
+    line-height: 0 !important;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+
+  &:hover {
+    background-color: var(--gray-100);
+    color: var(--gray-600);
+    box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
   }
 `;
 
