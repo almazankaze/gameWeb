@@ -38,6 +38,16 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
         },
         error: null,
       };
+    case PRODUCTIONS_ACTIONS_TYPES.DELETE_REVIEW_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        product: {
+          ...state.product,
+          reviews: state.product.reviews.filter(review => review._id !== payload.id),
+        },
+        error: null,
+      };
     case PRODUCTS_ACTION_TYPES.CREATE_REVIEW_FAILED:
       return { ...state, isLoading: false, error: payload };
     default:
