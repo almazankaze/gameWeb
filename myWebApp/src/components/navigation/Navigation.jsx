@@ -246,17 +246,25 @@ const Navigation = () => {
               <FavoriteBorderIcon className="navbar-icon" />
               <span className="badge"> 0 </span>
             </div>
-            <div className="nav-profile-link">
-              {user?.result ? (
-                <div className="nav-link" onClick={signMeOut}>
+            {user?.result ? (
+              <div className="nav-profile-link">
+                <div className="nav-profile-name nav-link">
                   {user?.result.name}
                 </div>
-              ) : (
+                <ul className="nav-profile-menu">
+                  <li className="nav-link">Settings</li>
+                  <li className="nav-link" onClick={signMeOut}>
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <div className="right-link">
                 <Link className="nav-link" to="/auth">
                   Sign In
                 </Link>
-              )}
-            </div>
+              </div>
+            )}
           </div>
           <div className="mobile-nav-right">
             <SearchIcon className="navbar-icon" onClick={toggleIsSearchOpen} />

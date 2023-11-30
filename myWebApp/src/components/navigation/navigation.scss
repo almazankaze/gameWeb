@@ -251,12 +251,42 @@
   text-align: center;
 }
 
+.right-link {
+  margin: 0 1rem;
+}
+
 .nav-profile-link {
   margin: 0 1rem;
+  position: relative;
+}
+
+.nav-profile-link:hover > .nav-profile-menu {
+  top: 29px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-profile-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 180px;
+}
+
+.nav-profile-menu {
+  list-style: none;
+  position: absolute;
+  background-color: var(--third-color);
+  box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
+  min-width: 136px;
+  max-width: 136px;
+  padding: 0.5rem;
+  top: 45px;
+  right: -20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .nav-link {
@@ -265,6 +295,15 @@
   font-weight: 600;
   color: var(--white);
   cursor: pointer;
+}
+
+.nav-profile-menu > .nav-link {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.nav-profile-menu > .nav-link:hover {
+  color: var(--secondary-color);
 }
 
 .mobile-nav-right {
