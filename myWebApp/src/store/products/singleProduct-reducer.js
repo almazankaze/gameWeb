@@ -44,7 +44,7 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
         isLoading: false,
         product: {
           ...state.product,
-          reviews: state.product.reviews.filter(review => review._id !== payload.id),
+          reviews: state.product.reviews.filter(review => review._id !== payload._id),
         },
         error: null,
       };
