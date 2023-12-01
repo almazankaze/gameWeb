@@ -79,13 +79,6 @@ const Product = () => {
 
   const product = useSelector(selectProduct);
   const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectProductError);
-
-  if (error) {
-    if (error?.response?.data.status === 404) {
-      navigate("/notfound");
-    }
-  }
 
   if (!product.reviews && !isLoading)
     return (

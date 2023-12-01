@@ -27,25 +27,42 @@ export const getProduct = (id) => {
 };
 
 // reviews
-export const createReviewStart = () => {
-  return { type: PRODUCTS_ACTION_TYPES.CREATE_REVIEW_START };
+export const reviewStart = () => {
+  return { type: PRODUCTS_ACTION_TYPES.REVIEW_START };
 };
 
 export const createReviewSuccess = (review) =>
   createAction(PRODUCTS_ACTION_TYPES.CREATE_REVIEW_SUCCESS, review);
 
-export const createReviewFailure = (error) =>
-  createAction(PRODUCTS_ACTION_TYPES.CREATE_REVIEW_FAILED, error);
+export const deleteReviewSuccess = (review) =>
+  createAction(PRODUCTS_ACTION_TYPES.DELETE_REVIEW_SUCCESS, review);
+
+export const reviewFailure = (error) =>
+  createAction(PRODUCTS_ACTION_TYPES.REVIEW_FAILED, error);
 
 export const createReview = (id, review, token) => {
   return async (dispatch) => {
-    dispatch(createReviewStart());
+    dispatch(reviewStart());
     try {
       const { data } = await api.postReview(id, review, token);
       dispatch(createReviewSuccess(data));
       return true;
     } catch (e) {
-      dispatch(createReviewFailure(e));
+      dispatch(reviewFailure(e));
+      return false;
+    }
+  };
+};
+
+export const deleteReview = (id, review, token) => {
+  return async (dispatch) => {
+    dispatch(reviewStart());
+    try {
+      const { data } = await api.deleteReview(id, review, token);
+      dispatch(deleteReviewSuccess(data));
+      return true;
+    } catch (e) {
+      dispatch(reviewFailure(e));
       return false;
     }
   };

@@ -5,12 +5,12 @@ import userIcon from "../../assets/product-page/default-user.png";
 
 import "./comment.scss";
 
-const Comment = ({ commentInfo, user }) => {
-  const { author, rating, date, body } = commentInfo;
+const Comment = ({ commentInfo, productId, user }) => {
+  const { _id, author, rating, date, body } = commentInfo;
   const dispatch = useDispatch();
 
   const openModal = () => {
-    dispatch(setIsModalOpen(true));
+    dispatch(setIsModalOpen(productId, _id, true));
   };
 
   return (

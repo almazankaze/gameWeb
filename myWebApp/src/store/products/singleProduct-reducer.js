@@ -22,7 +22,7 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
     case PRODUCTS_ACTION_TYPES.FETCH_PRODUCT_FAILED:
       return { ...state, isLoading: false, error: payload };
 
-    case PRODUCTS_ACTION_TYPES.CREATE_REVIEW_START:
+    case PRODUCTS_ACTION_TYPES.REVIEW_START:
       return {
         ...state,
         error: null,
@@ -38,17 +38,19 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
         },
         error: null,
       };
-    case PRODUCTIONS_ACTIONS_TYPES.DELETE_REVIEW_SUCCESS:
+    case PRODUCTS_ACTION_TYPES.DELETE_REVIEW_SUCCESS:
       return {
         ...state,
         isLoading: false,
         product: {
           ...state.product,
-          reviews: state.product.reviews.filter(review => review._id !== payload._id),
+          reviews: state.product.reviews.filter(
+            (review) => review._id !== payload._id
+          ),
         },
         error: null,
       };
-    case PRODUCTS_ACTION_TYPES.CREATE_REVIEW_FAILED:
+    case PRODUCTS_ACTION_TYPES.REVIEW_FAILED:
       return { ...state, isLoading: false, error: payload };
     default:
       return state;

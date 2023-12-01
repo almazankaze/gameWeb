@@ -1,6 +1,14 @@
+import { useState, useEffect } from "react";
 import { setIsModalOpen } from "../../store/modal/modal-actions";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsModalOpen } from "../../store/modal/modal-selector";
+import { useLocation } from "react-router-dom";
+import {
+  selectIsModalOpen,
+  selectModalProductId,
+  selectModalReviewId,
+} from "../../store/modal/modal-selector";
+import { deleteReview } from "../../store/products/singleProduct-actions";
+import { setShowToast } from "../../store/toast/toast-actions";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
 import {
@@ -21,10 +29,31 @@ const getModal = (modalType = MODAL_TYPE_CLASSES.base) =>
   }[modalType]);
 
 const Modal = ({ children, modalType, isLoading = false, ...otherProps }) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const CustomModal = getModal(modalType);
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("profile")));
+  }, [location]);
 
   const isOpen = useSelector(selectIsModalOpen);
+  const review = useSelector(selectModalReviewId);
+  const product = useSelector(selectModalProductId);
+
+  const removeReview = () => {
+    dispatch(deleteReview(product, review, user?.token)).then((resp) => {
+      if (resp) {
+        dispatch(setShowToast(true, "Succesfully deleted review"));
+      } else
+        dispatch(
+          setShowToast(true, "Could not delete review. Try again.", "Failed")
+        );
+
+      closeModal();
+    });
+  };
 
   const closeModal = () => {
     dispatch(setIsModalOpen(false));
@@ -43,6 +72,7 @@ const Modal = ({ children, modalType, isLoading = false, ...otherProps }) => {
                 type="button"
                 className="m-medium"
                 buttonType={BUTTON_TYPE_CLASSES.danger}
+                onClick={removeReview}
               >
                 Delete
               </Button>

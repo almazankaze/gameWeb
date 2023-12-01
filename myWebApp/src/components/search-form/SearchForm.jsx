@@ -1,8 +1,4 @@
 import { useRef } from "react";
-import {
-  setIsMenuOpen,
-  setIsSearchOpen,
-} from "../../store/navbar/navbar-actions";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 
@@ -29,6 +25,7 @@ const SearchForm = () => {
     <div className="search-container">
       <form
         className="search-form"
+        name="search-form"
         autoComplete="off"
         noValidate
         ref={formRef}

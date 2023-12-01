@@ -210,7 +210,12 @@ function ProductReview({ productId }) {
         ) : (
           <div className="comments-list">
             {product.reviews.map((review) => (
-              <Comment key={review._id} user={user} commentInfo={review} />
+              <Comment
+                key={review._id}
+                user={user}
+                productId={product._id}
+                commentInfo={review}
+              />
             ))}
           </div>
         )}

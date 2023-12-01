@@ -200,7 +200,12 @@ const AuthForm = () => {
     <Spinner />
   ) : (
     <div className="form-container">
-      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+      <form
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit}
+        id="auth-form"
+      >
         {!isSignup && (
           <>
             <div className="form-input">
