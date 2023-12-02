@@ -43,10 +43,12 @@ function ProductReview({ productId }) {
     const { error } = result;
     if (!error) {
       dispatch(createReview(productId, review, user?.token)).then((resp) => {
-        if (resp) {
+        if (resp === 200) {
           dispatch(setShowToast(true, "Succesfully added review"));
           clearState();
-        } else
+        } else if (resp === 405)
+          dispatch(setShowToast(true, "Already posted here.", "Failed"));
+        else
           dispatch(
             setShowToast(true, "Could not post review. Try again.", "Failed")
           );

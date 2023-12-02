@@ -46,10 +46,12 @@ export const createReview = (id, review, token) => {
     try {
       const { data } = await api.postReview(id, review, token);
       dispatch(createReviewSuccess(data));
-      return true;
+      return 200;
     } catch (e) {
       dispatch(reviewFailure(e));
-      return false;
+
+      if (e?.response?.status) return e.response.status;
+      else return 500;
     }
   };
 };
