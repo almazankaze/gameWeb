@@ -62,10 +62,11 @@ export const deleteReview = (id, review, token) => {
     try {
       const { data } = await api.deleteReview(id, review, token);
       dispatch(deleteReviewSuccess(data));
-      return true;
+      return 200;
     } catch (e) {
       dispatch(reviewFailure(e));
-      return false;
+      if (e?.response?.status) return e.response.status;
+      else return 500;
     }
   };
 };

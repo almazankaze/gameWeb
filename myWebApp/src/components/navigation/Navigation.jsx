@@ -49,7 +49,10 @@ const Navigation = () => {
   useEffect(() => {
     const currentPath = location.pathname + location.search;
 
-    dispatch(setNavPath(currentPath, prevPath.current));
+    if (currentPath === "/auth" && prevPath.current === "/auth") {
+      dispatch(setNavPath(currentPath, "/"));
+    } else dispatch(setNavPath(currentPath, prevPath.current));
+
     dispatch(setIsSearchOpen(false));
     dispatch(setIsModalOpen(false));
   }, [location]);

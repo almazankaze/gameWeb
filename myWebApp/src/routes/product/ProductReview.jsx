@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Joi from "joi-browser";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/products/singleProduct-actions";
+import { getUser } from "../../store/user/user-actions";
 import { selectUser } from "../../store/user/user-selector";
 import {
   selectProduct,
@@ -48,7 +49,11 @@ function ProductReview({ productId }) {
           clearState();
         } else if (resp === 405)
           dispatch(setShowToast(true, "Already posted here.", "Failed"));
-        else
+        else if (resp === 401) {
+          dispatch(getUser()).then(() => {
+            dispatch(setShowToast(true, "Please log back in.", "Failed"));
+          });
+        } else
           dispatch(
             setShowToast(true, "Could not post review. Try again.", "Failed")
           );

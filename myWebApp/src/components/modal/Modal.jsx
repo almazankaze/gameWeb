@@ -7,6 +7,7 @@ import {
   selectModalReviewId,
 } from "../../store/modal/modal-selector";
 import { deleteReview } from "../../store/products/singleProduct-actions";
+import { getUser } from "../../store/user/user-actions";
 import { setShowToast } from "../../store/toast/toast-actions";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
@@ -37,8 +38,12 @@ const Modal = ({ children, modalType, isLoading = false, ...otherProps }) => {
 
   const removeReview = () => {
     dispatch(deleteReview(product, review)).then((resp) => {
-      if (resp) {
+      if (resp === 200) {
         dispatch(setShowToast(true, "Succesfully deleted review"));
+      } else if (resp === 401) {
+        dispatch(getUser()).then(() => {
+          dispatch(setShowToast(true, "Please log back in.", "Failed"));
+        });
       } else
         dispatch(
           setShowToast(true, "Could not delete review. Try again.", "Failed")
