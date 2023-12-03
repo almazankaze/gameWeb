@@ -2,11 +2,6 @@ import axios from "axios";
 
 const myUrl = "http://localhost:5000";
 
-const config = {
-  "Content-Type": "application/json",
-  Authorization: "JWT Bearer",
-};
-
 const API = axios.create({ baseURL: myUrl });
 
 export const fetchProduct = (id) =>
@@ -36,24 +31,14 @@ export const fetchSearchProducts = (
   );
 
 //reviews
-export const postReview = (id, review, token) =>
+export const postReview = (id, review) =>
   API.post(`/products/${id}/reviews`, review, {
     withCredentials: true,
-    headers: {
-      authorization: token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
   });
 
-export const deleteReview = (id, review, token) =>
+export const deleteReview = (id, review) =>
   API.delete(`/products/${id}/reviews/${review}`, {
     withCredentials: true,
-    headers: {
-      authorization: token,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
   });
 
 //user
@@ -61,4 +46,6 @@ export const signIn = (formData) =>
   API.post("/users/login", formData, { withCredentials: true });
 export const signUp = (formData) =>
   API.post("/users/register", formData, { withCredentials: true });
+export const getUser = () =>
+  API.get("users/getUser", { withCredentials: true });
 export const logout = () => API.get("users/logout", { withCredentials: true });

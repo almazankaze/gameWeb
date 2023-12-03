@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsMenuOpen } from "./store/navbar/navbar-selector";
+import { selectUserIsLoading } from "./store/user/user-selector";
+import { getUser } from "./store/user/user-actions";
 import Home from "./routes/home/Home";
 import ShopSearch from "./routes/shop/ShopSearch";
 import About from "./routes/about/About";
@@ -18,11 +21,24 @@ import Modal from "./components/modal/Modal";
 
 import "./index.scss";
 import NavigateAuth from "./routes/auth/NavigateAuth";
+import Spinner from "./components/spinner/Spinner";
 
 function App() {
   const isMenuOpen = useSelector(selectIsMenuOpen);
+  const isLoading = useSelector(selectUserIsLoading);
+  const dispatch = useDispatch();
 
-  return (
+  useEffect(() => {
+    const checkIsLoggedIn = async () => {
+      dispatch(getUser());
+    };
+
+    checkIsLoggedIn();
+  }, []);
+
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <>
       <ScrollToTop>
         <Modal />

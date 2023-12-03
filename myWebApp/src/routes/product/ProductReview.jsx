@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Joi from "joi-browser";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/products/singleProduct-actions";
+import { selectUser } from "../../store/user/user-selector";
 import {
   selectProduct,
   selectIsLoading,
@@ -14,7 +15,6 @@ import ReviewDetails from "../../components/review-details/ReviewDetails";
 import Spinner from "../../components/spinner/Spinner";
 
 function ProductReview({ productId }) {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [reviewData, setReviewData] = useState({
     rating: 0,
     body: "",
@@ -42,7 +42,7 @@ function ProductReview({ productId }) {
 
     const { error } = result;
     if (!error) {
-      dispatch(createReview(productId, review, user?.token)).then((resp) => {
+      dispatch(createReview(productId, review)).then((resp) => {
         if (resp === 200) {
           dispatch(setShowToast(true, "Succesfully added review"));
           clearState();
@@ -97,6 +97,7 @@ function ProductReview({ productId }) {
 
   const product = useSelector(selectProduct);
   const isLoading = useSelector(selectIsLoading);
+  const user = useSelector(selectUser);
 
   if (isLoading) {
     return <Spinner />;
@@ -108,7 +109,7 @@ function ProductReview({ productId }) {
     <div className="product-review">
       {!product.reviews.length && !isLoading ? "" : <ReviewDetails />}
 
-      {user?.result ? (
+      {user ? (
         <form
           autoComplete="off"
           noValidate
@@ -214,7 +215,6 @@ function ProductReview({ productId }) {
             {product.reviews.map((review) => (
               <Comment
                 key={review._id}
-                user={user}
                 productId={product._id}
                 commentInfo={review}
               />

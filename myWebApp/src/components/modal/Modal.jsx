@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import { setIsModalOpen } from "../../store/modal/modal-actions";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+
 import {
   selectIsModalOpen,
   selectModalProductId,
@@ -29,21 +28,15 @@ const getModal = (modalType = MODAL_TYPE_CLASSES.base) =>
   }[modalType]);
 
 const Modal = ({ children, modalType, isLoading = false, ...otherProps }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const CustomModal = getModal(modalType);
   const dispatch = useDispatch();
-  const location = useLocation();
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
 
   const isOpen = useSelector(selectIsModalOpen);
   const review = useSelector(selectModalReviewId);
   const product = useSelector(selectModalProductId);
 
   const removeReview = () => {
-    dispatch(deleteReview(product, review, user?.token)).then((resp) => {
+    dispatch(deleteReview(product, review)).then((resp) => {
       if (resp) {
         dispatch(setShowToast(true, "Succesfully deleted review"));
       } else

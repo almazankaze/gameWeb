@@ -1,15 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/user/user-selector";
 import AuthForm from "../../components/auth-form/AuthForm";
 
 import "./auth.scss";
 
 const Authentication = () => {
   const navigate = useNavigate();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("profile"));
-
     if (user) {
       navigate("/", { replace: true });
     }

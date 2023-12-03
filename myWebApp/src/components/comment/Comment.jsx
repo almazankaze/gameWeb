@@ -1,12 +1,16 @@
 import { setIsModalOpen } from "../../store/modal/modal-actions";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/user/user-selector";
+
 import StarReview from "../star-review/StarReview";
 import userIcon from "../../assets/product-page/default-user.png";
 
 import "./comment.scss";
 
-const Comment = ({ commentInfo, productId, user }) => {
+const Comment = ({ commentInfo, productId }) => {
   const { _id, author, rating, date, body } = commentInfo;
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   const openModal = () => {
@@ -20,7 +24,7 @@ const Comment = ({ commentInfo, productId, user }) => {
           <img src={userIcon} alt="avatar" />
           <h4>{author.username}</h4>
         </div>
-        {user?.result && user.result._id === author._id && (
+        {user && user._id === author._id && (
           <p className="comment-remove" onClick={openModal}>
             Remove
           </p>

@@ -3,6 +3,7 @@ import { useState, useEffect, Fragment } from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { selectUser } from "../../store/user/user-selector";
 import {
   selectIsMenuOpen,
   selectIsSearchOpen,
@@ -17,8 +18,6 @@ import { setIsModalOpen } from "../../store/modal/modal-actions";
 import { logout } from "../../store/user/user-actions";
 
 import { selectCartCount } from "../../store/cart/cart-selector";
-
-import { jwtDecode } from "jwt-decode";
 
 import SideBar from "./SideBar";
 import SearchForm from "../search-form/SearchForm";
@@ -37,7 +36,6 @@ import "./navigation.scss";
 
 const Navigation = () => {
   const dispatch = useDispatch();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const isMenuOpen = useSelector(selectIsMenuOpen);
   const isSearchOpen = useSelector(selectIsSearchOpen);
   const cartCount = useSelector(selectCartCount);
@@ -46,22 +44,14 @@ const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const prevPath = useSelector(selectNavPath);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
-    const token = user?.token;
     const currentPath = location.pathname + location.search;
 
     dispatch(setNavPath(currentPath, prevPath.current));
     dispatch(setIsSearchOpen(false));
     dispatch(setIsModalOpen(false));
-
-    if (token) {
-      const decodedToken = jwtDecode(token);
-
-      if (decodedToken.exp * 1000 < new Date().getTime()) signMeOut();
-    }
-
-    setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
   const signMeOut = async () => {
@@ -69,7 +59,6 @@ const Navigation = () => {
     dispatch(setIsMenuOpen(false));
     dispatch(logout()).then(() => {
       navigate("/auth");
-      setUser(null);
     });
   };
 
@@ -246,11 +235,9 @@ const Navigation = () => {
               <FavoriteBorderIcon className="navbar-icon" />
               <span className="badge"> 0 </span>
             </div>
-            {user?.result ? (
+            {user ? (
               <div className="nav-profile-link">
-                <div className="nav-profile-name nav-link">
-                  {user?.result.name}
-                </div>
+                <div className="nav-profile-name nav-link">{user.username}</div>
                 <ul className="nav-profile-menu">
                   <li className="nav-link">Settings</li>
                   <li className="nav-link" onClick={signMeOut}>
@@ -276,7 +263,7 @@ const Navigation = () => {
         </div>
       </div>
 
-      <SideBar user={user} signout={signMeOut} />
+      <SideBar signout={signMeOut} />
       <Outlet />
     </Fragment>
   );

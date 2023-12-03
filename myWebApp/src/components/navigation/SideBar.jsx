@@ -15,18 +15,20 @@ import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
+import { selectUser } from "../../store/user/user-selector";
 import { selectIsMenuOpen } from "../../store/navbar/navbar-selector";
 import { setIsMenuOpen } from "../../store/navbar/navbar-actions";
 import { selectCartCount } from "../../store/cart/cart-selector";
 
 import "./sidebar.scss";
 
-const SideBar = ({ user, signout }) => {
+const SideBar = ({ signout }) => {
   const dispatch = useDispatch();
   const [showHardware, setShowHardware] = useState(false);
   const [showPeripherals, setShowPeripherals] = useState(false);
   const isMenuOpen = useSelector(selectIsMenuOpen);
   const cartCount = useSelector(selectCartCount);
+  const user = useSelector(selectUser);
 
   const toggleIsMenuOpen = () => dispatch(setIsMenuOpen(!isMenuOpen));
 
@@ -61,13 +63,13 @@ const SideBar = ({ user, signout }) => {
         <li>
           <Link
             className="side-link sidebar-item"
-            to={user?.result ? "/" : "/auth"}
+            to={user ? "/" : "/auth"}
             onClick={toggleIsMenuOpen}
           >
             <PermIdentityOutlinedIcon className="sidebar-icon" />
 
             <div className="sidebar-profile">
-              {user?.result ? user.result.name : "Sign In"}
+              {user ? user.username : "Sign In"}
             </div>
           </Link>
         </li>
@@ -185,7 +187,7 @@ const SideBar = ({ user, signout }) => {
           </Link>
         </li>
 
-        {user?.result && (
+        {user && (
           <li>
             <Link className="side-link sidebar-item" to="/" onClick={signout}>
               <LogoutOutlinedIcon className="sidebar-icon" /> Log Out

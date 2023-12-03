@@ -48,6 +48,20 @@ export const signUp = (userData) => {
   };
 };
 
+export const getUser = () => {
+  return async (dispatch) => {
+    dispatch(fetchUserStart());
+    try {
+      const { data } = await api.getUser();
+      dispatch(fetchUserSuccess(data));
+      return 200;
+    } catch (e) {
+      dispatch(userFailure(e));
+      return e.response.status;
+    }
+  };
+};
+
 export const logout = () => {
   return async (dispatch) => {
     dispatch(userLogoutStart);
