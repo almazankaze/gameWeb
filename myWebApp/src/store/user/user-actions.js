@@ -20,6 +20,21 @@ export const userLogoutSuccess = () =>
 export const userFailure = (error) =>
   createAction(USER_ACTION_TYPES.USER_FAIL, error);
 
+export const googleSignIn = () => {
+  return async (dispatch) => {
+    dispatch(fetchUserStart());
+    try {
+      const { data } = await api.googleLogin();
+      dispatch(fetchUserSuccess(data));
+      return 200;
+    } catch (e) {
+      dispatch(userFailure(e));
+      if (e?.response?.status) return e.response.status;
+      else return 500;
+    }
+  };
+};
+
 export const signIn = (userData) => {
   return async (dispatch) => {
     dispatch(fetchUserStart());
@@ -29,7 +44,8 @@ export const signIn = (userData) => {
       return 200;
     } catch (e) {
       dispatch(userFailure(e));
-      return e.response.status;
+      if (e?.response?.status) return e.response.status;
+      else return 500;
     }
   };
 };
@@ -43,7 +59,8 @@ export const signUp = (userData) => {
       return 200;
     } catch (e) {
       dispatch(userFailure(e));
-      return e.response.status;
+      if (e?.response?.status) return e.response.status;
+      else return 500;
     }
   };
 };

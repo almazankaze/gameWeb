@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserError } from "../../store/user/user-selector";
 import { selectNavPath } from "../../store/navbar/navbar-selector";
-import { signIn, signUp } from "../../store/user/user-actions";
+import { signIn, signUp, googleSignIn } from "../../store/user/user-actions";
 import Joi from "joi-browser";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -106,6 +106,17 @@ const AuthForm = () => {
 
     setErrors({});
     setOtherError("");
+  };
+
+  const handleGoogle = async () => {
+    dispatch(googleSignIn()).then((resp) => {
+      if (resp >= 400) {
+        setOtherError("something went wrong. Try again.");
+      } else {
+        navigate(path.prev, { replace: true });
+        clearState();
+      }
+    });
   };
 
   const handleSubmit = async (event) => {
@@ -317,6 +328,7 @@ const AuthForm = () => {
               type="button"
               buttonType={BUTTON_TYPE_CLASSES.google}
               className="full-btn"
+              onClick={handleGoogle}
             >
               <span>Google</span>
             </Button>

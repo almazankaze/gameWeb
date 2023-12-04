@@ -42,6 +42,8 @@ export const deleteReview = (id, review) =>
   });
 
 //user
+export const googleLogin = () =>
+  API.get("/users/google", { withCredentials: true });
 export const signIn = (formData) =>
   API.post("/users/login", formData, { withCredentials: true });
 export const signUp = (formData) =>
