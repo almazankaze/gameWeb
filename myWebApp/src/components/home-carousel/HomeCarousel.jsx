@@ -79,6 +79,7 @@ const HomeCarousel = () => {
         backgrounds={[banner1, banner1_mobile]}
         stickerMess="Out Now"
         active={activeImg}
+        path="6563bbcbb78b966b18fcb57e"
       />
       <Slide
         id={2}
@@ -86,6 +87,7 @@ const HomeCarousel = () => {
         backgrounds={[banner2, banner2_mobile]}
         stickerMess="Now On PS5"
         active={activeImg}
+        path="6563bbcbb78b966b18fcb582"
       />
       <Slide
         id={3}
@@ -93,6 +95,7 @@ const HomeCarousel = () => {
         backgrounds={[banner3, banner3_mobile]}
         stickerMess="Top Rated"
         active={activeImg}
+        path="6563bbcbb78b966b18fcb580"
       />
 
       <button type="button" className="btn-slide next" onClick={nextSlide}>

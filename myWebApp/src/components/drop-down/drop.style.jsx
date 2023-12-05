@@ -14,7 +14,7 @@ export const DropDownLink = styled(Link)`
 
 export const BaseDropDown = styled.div`
   position: absolute;
-  background-color: var(--black);
+  background-color: var(--third-color);
   box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
   min-width: 178px;
   max-width: 225px;

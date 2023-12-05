@@ -66,7 +66,15 @@ const SideBar = ({ signout }) => {
             to={user ? "/" : "/auth"}
             onClick={toggleIsMenuOpen}
           >
-            <PermIdentityOutlinedIcon className="sidebar-icon" />
+            {user?.thumbnail ? (
+              <img
+                src={user.thumbnail}
+                alt={""}
+                className="sidebar-profile-img"
+              />
+            ) : (
+              <PermIdentityOutlinedIcon className="sidebar-icon" />
+            )}
 
             <div className="sidebar-profile">
               {user ? user.username : "Sign In"}

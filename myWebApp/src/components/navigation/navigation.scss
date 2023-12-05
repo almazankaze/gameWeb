@@ -88,7 +88,7 @@
 .dropdown-menu {
   list-style: none;
   position: absolute;
-  background-color: var(--black);
+  background-color: var(--third-color);
   box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
   width: 240px;
   padding: 0.5rem;
@@ -161,7 +161,7 @@
 
 .menu-right {
   position: absolute;
-  background-color: var(--black);
+  background-color: var(--third-color);
   box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
   width: max-content;
   top: 0;
@@ -258,6 +258,13 @@
 .nav-profile-link {
   margin: 0 1rem;
   position: relative;
+}
+
+.nav-profile-link img {
+  border-radius: 50%;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
 }
 
 .nav-profile-link:hover > .nav-profile-menu {

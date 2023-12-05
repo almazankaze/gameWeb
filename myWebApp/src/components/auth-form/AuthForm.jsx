@@ -109,14 +109,10 @@ const AuthForm = () => {
   };
 
   const handleGoogle = async () => {
-    dispatch(googleSignIn()).then((resp) => {
-      if (resp >= 400) {
-        setOtherError("something went wrong. Try again.");
-      } else {
-        navigate(path.prev, { replace: true });
-        clearState();
-      }
-    });
+    window.open(
+      `${import.meta.env.VITE_APP_API_URL}/users/oauth2/redirect/google`,
+      "_self"
+    );
   };
 
   const handleSubmit = async (event) => {

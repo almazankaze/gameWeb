@@ -21,7 +21,11 @@ const Comment = ({ commentInfo, productId }) => {
     <div className="comment">
       <div className="author">
         <div className="author-info">
-          <img src={userIcon} alt="avatar" />
+          {author?.thumbnail ? (
+            <img src={author.thumbnail} alt="avatar" />
+          ) : (
+            <img src={userIcon} alt="avatar" />
+          )}
           <h4>{author.username}</h4>
         </div>
         {user && user._id === author._id && (

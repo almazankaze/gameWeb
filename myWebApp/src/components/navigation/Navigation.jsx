@@ -240,9 +240,17 @@ const Navigation = () => {
             </div>
             {user ? (
               <div className="nav-profile-link">
-                <div className="nav-profile-name nav-link">{user.username}</div>
+                {user.thumbnail ? (
+                  <img src={user.thumbnail} alt={user.username} />
+                ) : (
+                  <div className="nav-profile-name nav-link">
+                    {user.username}
+                  </div>
+                )}
+
                 <ul className="nav-profile-menu">
                   <li className="nav-link">Settings</li>
+                  <li className="nav-link">Purchases</li>
                   <li className="nav-link" onClick={signMeOut}>
                     Logout
                   </li>
