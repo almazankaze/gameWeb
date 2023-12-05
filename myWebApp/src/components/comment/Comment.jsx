@@ -22,7 +22,11 @@ const Comment = ({ commentInfo, productId }) => {
       <div className="author">
         <div className="author-info">
           {author?.thumbnail ? (
-            <img src={author.thumbnail} alt="avatar" />
+            <img
+              src={author.thumbnail}
+              referrerPolicy="no-referrer"
+              alt="avatar"
+            />
           ) : (
             <img src={userIcon} alt="avatar" />
           )}

@@ -69,6 +69,7 @@ const SideBar = ({ signout }) => {
             {user?.thumbnail ? (
               <img
                 src={user.thumbnail}
+                referrerPolicy="no-referrer"
                 alt={""}
                 className="sidebar-profile-img"
               />

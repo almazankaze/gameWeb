@@ -241,7 +241,11 @@ const Navigation = () => {
             {user ? (
               <div className="nav-profile-link">
                 {user.thumbnail ? (
-                  <img src={user.thumbnail} alt={user.username} />
+                  <img
+                    src={user.thumbnail}
+                    referrerPolicy="no-referrer"
+                    alt={user.username}
+                  />
                 ) : (
                   <div className="nav-profile-name nav-link">
                     {user.username}
