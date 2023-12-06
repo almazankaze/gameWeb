@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Checkbox from "../checkbox/Checkbox";
 import Button from "../button/Button";
 import RadioButtons from "../radio/RadioButtons";
@@ -17,6 +17,7 @@ const initPlatforms = [
 const productTypes = ["All", "Accessories", "Consoles", "Games"];
 
 const FilterSidebar = ({ searchQuery }) => {
+  const [params, setParams] = useSearchParams();
   const [showFilter, setShowFilter] = useState(false);
   const [onSaleChecked, setOnSaleChecked] = useState(false);
   const [freeShipChecked, setFreeShipChecked] = useState(false);
