@@ -7,8 +7,9 @@ import {
   BaseCheckbox,
 } from "./Checkbox.style";
 
-const Checkbox = ({ label, ...otherProps }) => {
-  const [checked, setChecked] = useState(false);
+const Checkbox = ({ label, checked, ...otherProps }) => {
+  const defaultChecked = checked ? checked : false;
+  const [checked, setChecked] = useState(defaultChecked);
 
   return (
     <CheckBoxContainer {...otherProps}>
