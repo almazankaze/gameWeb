@@ -19,9 +19,15 @@ const productTypes = ["All", "Accessories", "Consoles", "Games"];
 const FilterSidebar = ({ searchQuery }) => {
   const [params, setParams] = useSearchParams();
   const [showFilter, setShowFilter] = useState(false);
-  const [onSaleChecked, setOnSaleChecked] = useState(false);
-  const [freeShipChecked, setFreeShipChecked] = useState(false);
-  const [inStockChecked, setInStockChecked] = useState(false);
+  const [onSaleChecked, setOnSaleChecked] = useState(
+    params.get("onSale") ? true : false
+  );
+  const [freeShipChecked, setFreeShipChecked] = useState(
+    params.get("freeShip") ? true : false
+  );
+  const [inStockChecked, setInStockChecked] = useState(
+    params.get("inStock") ? true : false
+  );
   const [platforms, setPlatforms] = useState(new Array(6).fill(false));
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000);
@@ -94,9 +100,21 @@ const FilterSidebar = ({ searchQuery }) => {
       >
         <div className="filter-section">
           <h4>Service and Promotion</h4>
-          <Checkbox label="With discount" onChange={handleOnSaleChecked} />
-          <Checkbox label="Free shipping" onChange={handleFreeShipChecked} />
-          <Checkbox label="Available stock" onChange={handleInStockChecked} />
+          <Checkbox
+            label="With discount"
+            ischecked={onSaleChecked}
+            onChange={handleOnSaleChecked}
+          />
+          <Checkbox
+            label="Free shipping"
+            ischecked={freeShipChecked}
+            onChange={handleFreeShipChecked}
+          />
+          <Checkbox
+            label="Available stock"
+            ischecked={inStockChecked}
+            onChange={handleInStockChecked}
+          />
         </div>
         <div className="filter-section">
           <h4>Product Type</h4>

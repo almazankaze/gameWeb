@@ -7,8 +7,8 @@ import {
   BaseCheckbox,
 } from "./Checkbox.style";
 
-const Checkbox = ({ label, checked, ...otherProps }) => {
-  const defaultChecked = checked ? checked : false;
+const Checkbox = ({ label, ischecked, ...otherProps }) => {
+  const defaultChecked = ischecked ? ischecked : false;
   const [checked, setChecked] = useState(defaultChecked);
 
   return (
