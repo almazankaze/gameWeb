@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserError } from "../../store/user/user-selector";
+
 import { selectNavPath } from "../../store/navbar/navbar-selector";
-import { signIn, signUp, googleSignIn } from "../../store/user/user-actions";
+import { signIn, signUp } from "../../store/user/user-actions";
 import Joi from "joi-browser";
+import PasswordChecklist from "react-password-checklist";
 import { Link, useNavigate } from "react-router-dom";
 
 import Button, { BUTTON_TYPE_CLASSES } from "../../components/button/Button";
@@ -73,8 +74,10 @@ const AuthForm = () => {
 
   const handleSave = (event) => {
     const { name, value } = event.target;
+
     let errorData = { ...errors };
     delete errorData[name];
+
     let data = { ...formData };
     data[name] = value;
     setFormData(data);
@@ -201,8 +204,6 @@ const AuthForm = () => {
     setIsSignUp((prevIsSignUp) => !prevIsSignUp);
   };
 
-  const error = useSelector(selectUserError);
-
   return loading ? (
     <Spinner />
   ) : (
@@ -279,9 +280,6 @@ const AuthForm = () => {
               <label>Password</label>
             </div>
 
-            {errors.password && (
-              <div className="input-error">{errors.password}</div>
-            )}
             <div className="form-input">
               <input
                 type="password"
@@ -293,10 +291,6 @@ const AuthForm = () => {
               <span></span>
               <label>Confirm Password</label>
             </div>
-
-            {errors.confirmPassword && (
-              <div className="input-error">passwords should match</div>
-            )}
           </>
         )}
 
@@ -339,6 +333,24 @@ const AuthForm = () => {
           </button>
         </p>
       </form>
+
+      {isSignup && (
+        <>
+          {" "}
+          {formData.password ? (
+            <PasswordChecklist
+              rules={["minLength", "specialChar", "number", "capital", "match"]}
+              minLength={8}
+              value={formData.password}
+              valueAgain={formData.confirmPassword}
+              iconSize={14}
+              style={{ fontSize: "12px" }}
+            />
+          ) : (
+            ""
+          )}
+        </>
+      )}
     </div>
   );
 };

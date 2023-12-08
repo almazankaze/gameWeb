@@ -4,6 +4,7 @@ export const PRODUCT_INITIAL_STATE = {
   product: {},
   isLoading: false,
   error: null,
+  reviewError: null,
 };
 
 export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
@@ -14,6 +15,7 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
       return {
         ...state,
         error: null,
+        reviewError: null,
         product: {},
         isLoading: true,
       };
@@ -26,6 +28,7 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
       return {
         ...state,
         error: null,
+        reviewError: null,
         isLoading: true,
       };
     case PRODUCTS_ACTION_TYPES.CREATE_REVIEW_SUCCESS:
@@ -36,7 +39,7 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
           ...state.product,
           reviews: [...state.product.reviews, payload],
         },
-        error: null,
+        reviewError: null,
       };
     case PRODUCTS_ACTION_TYPES.DELETE_REVIEW_SUCCESS:
       return {
@@ -48,10 +51,10 @@ export const productReducer = (state = PRODUCT_INITIAL_STATE, action = {}) => {
             (review) => review._id !== payload._id
           ),
         },
-        error: null,
+        reviewError: null,
       };
     case PRODUCTS_ACTION_TYPES.REVIEW_FAILED:
-      return { ...state, isLoading: false, error: payload };
+      return { ...state, isLoading: false, reviewError: payload };
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart-selector";
@@ -79,8 +79,15 @@ const Product = () => {
 
   const product = useSelector(selectProduct);
   const isLoading = useSelector(selectIsLoading);
+  const productError = useSelector(selectProductError);
 
-  if (!product.reviews && !isLoading)
+  if (productError) {
+    if (productError?.response?.status === 404)
+      return <Navigate to="/notfound" />;
+    else return <Navigate to="/notfound" />;
+  }
+
+  if (!product.img && !isLoading)
     return (
       <section className="container">
         <Spinner />
