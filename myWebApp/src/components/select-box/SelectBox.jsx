@@ -9,6 +9,7 @@ import {
 
 const SelectBox = () => {
   const [showDropMenu, setShowDropMenu] = useState(false);
+  const [dropDownText, setDropDownText] = useState("Order By");
   const btnRef = useRef();
 
   useEffect(() => {
@@ -16,6 +17,9 @@ const SelectBox = () => {
       if (
         e.target !== btnRef.current &&
         e.target.innerText !== "Order By" &&
+        e.target.innerText !== "Highest Price" &&
+        e.target.innerText !== "Lowest Price" &&
+        e.target.innerText !== "Most Popular" &&
         e.target.innerText !== "^"
       )
         setShowDropMenu(false);
@@ -26,6 +30,11 @@ const SelectBox = () => {
     return () => document.body.removeEventListener("click", closeDropdown);
   }, []);
 
+  const handleDropdownClick = (text) => {
+    if (dropDownText === text) setDropDownText("Order By");
+    else setDropDownText(text);
+  };
+
   return (
     <BaseSelector
       ref={btnRef}
@@ -33,7 +42,7 @@ const SelectBox = () => {
       onClick={() => setShowDropMenu((prev) => !prev)}
     >
       <SelectorTitle>
-        <p>Order By</p>
+        <p>{dropDownText}</p>
         <SelectorArrow
           className={
             showDropMenu ? "dropdown-arrow rotate-arrow" : "dropdown-arrow"
@@ -43,9 +52,11 @@ const SelectBox = () => {
         </SelectorArrow>
       </SelectorTitle>
       <SelectContent className={showDropMenu ? "show-drop-menu" : ""}>
-        <p>Highest Price</p>
-        <p>Lowest Price</p>
-        <p>Most Popular</p>
+        <p onClick={() => handleDropdownClick("Highest Price")}>
+          Highest Price
+        </p>
+        <p onClick={() => handleDropdownClick("Lowest Price")}>Lowest Price</p>
+        <p onClick={() => handleDropdownClick("Most Popular")}>Most Popular</p>
       </SelectContent>
     </BaseSelector>
   );

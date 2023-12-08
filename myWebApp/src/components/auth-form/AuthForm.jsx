@@ -10,6 +10,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Button, { BUTTON_TYPE_CLASSES } from "../../components/button/Button";
 import Checkbox from "../checkbox/Checkbox";
 import Spinner from "../spinner/Spinner";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import { getEmailFragments } from "../../utils/functions/getEmailFragments";
 
@@ -32,6 +34,7 @@ const AuthForm = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [otherError, setOtherError] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const path = useSelector(selectNavPath);
 

@@ -9,8 +9,8 @@ export const BaseSelector = styled.div`
   background-color: var(--third-color);
   font-size: 1.25rem;
   padding: 0 0.5rem;
-  min-width: 124px;
-  max-width: 124px;
+  min-width: 168px;
+  max-width: 168px;
   height: 38px;
   cursor: pointer;
   user-select: none;
@@ -25,7 +25,9 @@ export const BaseSelector = styled.div`
 
 export const SelectorTitle = styled.div`
   display: flex;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
   position: relative;
 `;
 
@@ -33,7 +35,7 @@ export const SelectorArrow = styled.div`
   position: absolute;
   transform: rotate(180deg);
   bottom: 0;
-  left: 100%;
+  left: 85%;
   font-size: 1.375rem;
   color: var(--secondary-color);
   padding: 0.5rem 0.5rem 0;
@@ -57,7 +59,7 @@ export const SelectContent = styled.div`
   overflow: hidden;
   top: 40px;
   left: 0;
-  min-width: 150px;
+  min-width: 160px;
 
   background-color: var(--third-color);
   border: 2px solid var(--white);

@@ -10,11 +10,13 @@ import {
 
 const RadioButtons = ({
   forwardedRef,
+  defaultCheck,
   name = "myRadio",
   buttons = [],
   ...otherProps
 }) => {
-  const [checked, setChecked] = useState(buttons[0]);
+  const defaultChecked = defaultCheck ? defaultCheck : "All";
+  const [checked, setChecked] = useState(defaultChecked);
 
   const handleSelectChange = (e) => {
     setChecked(e.target.value);

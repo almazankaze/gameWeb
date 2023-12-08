@@ -28,10 +28,31 @@ const FilterSidebar = ({ searchQuery }) => {
   const [inStockChecked, setInStockChecked] = useState(
     params.get("inStock") ? true : false
   );
-  const [platforms, setPlatforms] = useState(new Array(6).fill(false));
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(10000);
+  const [minPrice, setMinPrice] = useState(
+    params.has("minPrice")
+      ? Math.round(Number(params.get("minPrice")) * 100) / 100
+      : 0
+  );
+  const [maxPrice, setMaxPrice] = useState(
+    params.has("maxPrice")
+      ? Math.round(Number(params.get("maxPrice")) * 100) / 100
+      : 10000
+  );
+
+  const deafultCheck = params.has("productType")
+    ? params.get("productType")
+    : "All";
   const productType = useRef(null);
+
+  // plarform
+  const checkedPlatforms = params.getAll("categories");
+  const checkedPlatObject = {};
+  checkedPlatforms.forEach((plat) => (checkedPlatObject[plat] = plat));
+  const initCheckedPlat = initPlatforms.map((plat) => {
+    if (plat in checkedPlatObject) return true;
+    else return false;
+  });
+  const [platforms, setPlatforms] = useState(initCheckedPlat);
 
   let navigate = useNavigate();
 
@@ -48,8 +69,9 @@ const FilterSidebar = ({ searchQuery }) => {
       if (platform) path += `&categories=${initPlatforms[i]}`;
     });
 
-    if (minPrice > 0) path += "&minPrice=" + minPrice;
-    if (maxPrice < 10000) path += "&maxPrice=" + maxPrice;
+    if (minPrice > 0) path += "&minPrice=" + Math.round(minPrice * 100) / 100;
+    if (maxPrice < 10000)
+      path += "&maxPrice=" + Math.round(maxPrice * 100) / 100;
 
     navigate(`/shop?term=${searchQuery}${path}&page=${1}`);
   };
@@ -120,6 +142,7 @@ const FilterSidebar = ({ searchQuery }) => {
           <h4>Product Type</h4>
           <RadioButtons
             name={"productType"}
+            defaultCheck={deafultCheck}
             buttons={productTypes}
             forwardedRef={productType}
           />
@@ -129,6 +152,7 @@ const FilterSidebar = ({ searchQuery }) => {
           {initPlatforms.map((platform, index) => (
             <Checkbox
               key={index}
+              ischecked={platforms[index]}
               label={platform}
               onChange={() => handlePlatformChecked(index)}
             />
@@ -141,6 +165,7 @@ const FilterSidebar = ({ searchQuery }) => {
               className="filter-input"
               type="number"
               placeholder="$ Min"
+              value={minPrice}
               onChange={handleMinChange}
             />
             <div className="filter-range-line"></div>
@@ -148,6 +173,7 @@ const FilterSidebar = ({ searchQuery }) => {
               className="filter-input"
               type="number"
               placeholder="$ Max"
+              value={maxPrice}
               onChange={handleMaxChange}
             />
           </div>
