@@ -281,8 +281,9 @@
 }
 
 .nav-profile-menu {
-  list-style: none;
   position: absolute;
+  display: flex;
+  flex-direction: column;
   background-color: var(--third-color);
   box-shadow: 0 6px 18px 7px rgba(249, 170, 1, 0.2);
   min-width: 136px;
@@ -305,7 +306,7 @@
 }
 
 .nav-profile-menu > .nav-link {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   text-align: center;
 }
 

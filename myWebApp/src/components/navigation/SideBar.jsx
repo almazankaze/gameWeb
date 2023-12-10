@@ -63,7 +63,7 @@ const SideBar = ({ signout }) => {
         <li>
           <Link
             className="side-link sidebar-item"
-            to={user ? "/" : "/auth"}
+            to={user ? "/account" : "/auth"}
             onClick={toggleIsMenuOpen}
           >
             {user?.thumbnail ? (

@@ -9,6 +9,7 @@ import ShopSearch from "./routes/shop/ShopSearch";
 import About from "./routes/about/About";
 import Cart from "./routes/cart/Cart";
 import Product from "./routes/product/Product";
+import Account from "./routes/settings/Account";
 import Authentication from "./routes/auth/Authentication";
 import NotFound from "./routes/errors/NotFound";
 
@@ -50,6 +51,14 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="cart" element={<Cart />} />
             <Route path="products/:id" element={<Product />} />
+            <Route
+              path="account"
+              element={
+                <NavigateAuth>
+                  <Account />
+                </NavigateAuth>
+              }
+            />
             <Route path="auth" element={<Authentication />} />
             <Route path="notfound" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/" />} />

@@ -1,0 +1,153 @@
+.settings {
+  min-height: 60vh;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 0.5rem;
+  padding-top: 2rem;
+}
+
+.settings-menu {
+  background-color: var(--third-color);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.settings-user-info {
+  padding: 1.4rem 0;
+  text-align: center;
+}
+
+.settings-menu-profile-img {
+  border-radius: 50%;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 1rem;
+}
+
+.settings-menu-profile-icon {
+  margin-bottom: 1rem;
+}
+
+.settings-menu-buttons {
+  list-style: none;
+}
+
+.menu-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  border-bottom: var(--gray-400) solid 1px;
+  transition: background-color 0.3s linear;
+}
+
+.settings-menu-buttons .menu-button:last-child {
+  border-bottom: none;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.menu-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.active {
+  background-color: var(--secondary-color-dark);
+}
+
+.settings-menu-icon {
+  transform: scale(1.2);
+  color: var(---white);
+  margin-right: 0.75rem;
+}
+
+.my-account {
+  background-color: var(--third-color);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.my-account-form-container {
+  margin-top: 1.5rem;
+}
+
+.my-account-inputs-container {
+  display: flex;
+}
+
+.my-account-inputs-container .my-account-input-container:first-child {
+  margin-right: 0.5rem;
+}
+
+.my-account-input-container {
+  width: 100%;
+  margin-bottom: 0.625rem;
+}
+
+.my-account-input {
+  width: 100%;
+  color: var(--white);
+  padding: 1.25rem 0.625rem 1rem;
+  height: 2rem;
+  border: 2px solid var(--gray-800);
+  background-color: var(--main-color);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.my-account-input:focus {
+  border: 2px solid var(--secondary-color);
+}
+
+.my-account-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  padding: 0.625rem;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.my-account-button-danger {
+  background-color: var(--error);
+}
+
+.my-account-button-info {
+  display: flex;
+  align-items: center;
+}
+
+.my-account-button-icon {
+  color: var(--white);
+  transform: scale(0.8);
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 550px) {
+  .my-account-inputs-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .my-account-inputs-container .my-account-input-container:first-child {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .my-account-button-info {
+    font-size: 0.825rem;
+  }
+}

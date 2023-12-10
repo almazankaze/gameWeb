@@ -252,13 +252,18 @@ const Navigation = () => {
                   </div>
                 )}
 
-                <ul className="nav-profile-menu">
-                  <li className="nav-link">Settings</li>
-                  <li className="nav-link">Purchases</li>
-                  <li className="nav-link" onClick={signMeOut}>
+                <div className="nav-profile-menu">
+                  <Link className="nav-link" to="/account">
+                    Settings
+                  </Link>
+
+                  <Link className="nav-link" to="/">
+                    Purchases
+                  </Link>
+                  <div className="nav-link" onClick={signMeOut}>
                     Logout
-                  </li>
-                </ul>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className="right-link">

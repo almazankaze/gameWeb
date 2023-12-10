@@ -1,9 +1,14 @@
 import SectionHeader from "../../components/section-header/SectionHeader";
-import deal1 from "../../assets/home-images/deal-1.jpg";
-import deal2 from "../../assets/home-images/deal-2.jpg";
-import deal3 from "../../assets/home-images/deal-3.jpg";
-import deal4 from "../../assets/home-images/deal-4.jpg";
-import deal5 from "../../assets/home-images/deal-5.jpg";
+const deal1 =
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1702155646/testWeb/mvx51bhm2yscf4eojwir.jpg";
+const deal2 =
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1702155653/testWeb/kn9a9rpnb3xwj6zc8gkx.jpg";
+const deal3 =
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/v1702155660/testWeb/wbxvhfhg574vg9yxccyv.jpg";
+const deal4 =
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/e_improve:outdoor/c_scale,h_779,w_1200/testWeb/s1jjdtsmief17rghmjcq.jpg";
+const deal5 =
+  "https://res.cloudinary.com/dp8afa9xy/image/upload/e_improve:outdoor/c_scale,h_779,w_1200/testWeb/efowgkudd2ocwhh1ekot.jpg";
 
 const HotDealsSection = () => {
   return (
