@@ -60,6 +60,12 @@ export const CartButton = styled(BaseButton)`
 
 export const HeroButton = styled(CartButton)``;
 
+export const StackButton = styled(BaseButton)`
+  margin: 0.5rem;
+  font-size: 0.825rem;
+  text-transform: none;
+`;
+
 export const DetailButton = styled(CartButton)`
   font-size: 0.875rem;
   font-weight: 800;

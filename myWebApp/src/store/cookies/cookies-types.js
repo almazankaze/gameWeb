@@ -1,0 +1,3 @@
+export const COOKIES_ACTION_TYPES = {
+  SET_COOKIES: "SET_COOKIES",
+};

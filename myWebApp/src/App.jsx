@@ -19,6 +19,7 @@ import Navigation from "./components/navigation/Navigation";
 import ScrollToTop from "./components/scrollup/ScrollToTop";
 import ToastMessage from "./components/toast/ToastMessage";
 import Modal from "./components/modal/Modal";
+import CookiePrompt from "./components/cookiePrompt/CookiePrompt";
 
 import "./index.scss";
 import NavigateAuth from "./routes/auth/NavigateAuth";
@@ -67,6 +68,7 @@ function App() {
         <div className={isMenuOpen ? "nav-open-background" : ""}></div>
         <Footer />
         <ScrollUp />
+        <CookiePrompt />
         <ToastMessage />
       </ScrollToTop>
     </>

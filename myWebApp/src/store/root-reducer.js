@@ -8,6 +8,7 @@ import { searchReducer } from "./products/searchProducts/search-reducer.js";
 import { toastReducer } from "./toast/toast-reducer.js";
 import { modalReducer } from "./modal/modal-reducer.js";
 import { userReducer } from "./user/user-reducer.js";
+import { cookiesReducer } from "./cookies/cookies-reducer.js";
 
 export const rootReducer = combineReducers({
   navbar: NavReducer,
@@ -18,4 +19,5 @@ export const rootReducer = combineReducers({
   toast: toastReducer,
   modal: modalReducer,
   user: userReducer,
+  cookies: cookiesReducer,
 });

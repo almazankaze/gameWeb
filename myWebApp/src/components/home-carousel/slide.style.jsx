@@ -19,7 +19,7 @@ export const SlideContainer = styled.div`
   }
 
   > .container {
-    z-index: 4;
+    z-index: 1;
   }
 
   @media (max-width: 500px) {

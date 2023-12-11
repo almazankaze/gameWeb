@@ -72,7 +72,6 @@ const HomeCarousel = () => {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <FogAnim />
       <Slide
         id={1}
         title="NieR:Automata"
