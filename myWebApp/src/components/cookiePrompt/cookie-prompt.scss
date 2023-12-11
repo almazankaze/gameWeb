@@ -4,6 +4,7 @@
   left: 0;
   width: 100%;
   padding: 0 1rem;
+  z-index: 900;
 }
 
 .cookie-prompt {
@@ -15,7 +16,6 @@
   max-width: 735px;
   text-align: left;
   margin: auto;
-  z-index: 900;
   transform: translateY(calc(100% + 60px));
   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
 }
