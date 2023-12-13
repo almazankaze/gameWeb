@@ -116,7 +116,7 @@ const AuthForm = () => {
 
   const handleGoogle = async () => {
     window.open(
-      `${import.meta.env.VITE_APP_API_URL}/users/oauth2/redirect/google`,
+      `https://git.heroku.com/sleepy-atoll-68323.git/users/oauth2/redirect/google`,
       "_self"
     );
   };

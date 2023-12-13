@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const myUrl = "http://localhost:5000";
+const myUrl = "https://git.heroku.com/sleepy-atoll-68323.git";
 
 const API = axios.create({ baseURL: myUrl });
 
