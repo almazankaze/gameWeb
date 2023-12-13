@@ -116,7 +116,7 @@ const AuthForm = () => {
 
   const handleGoogle = async () => {
     window.open(
-      `https://git.heroku.com/sleepy-atoll-68323.git/users/oauth2/redirect/google`,
+      `https://sleepy-atoll-68323-3a64e305cb95.herokuapp.com/users/oauth2/redirect/google`,
       "_self"
     );
   };
