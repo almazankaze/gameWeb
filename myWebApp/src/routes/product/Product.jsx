@@ -39,6 +39,10 @@ const Product = () => {
   const [quantity, setQuantity] = useState(0);
   const [currentImg, setCurrentImg] = useState(0);
 
+  const product = useSelector(selectProduct);
+  const isLoading = useSelector(selectIsLoading);
+  const productError = useSelector(selectProductError);
+
   let navigate = useNavigate();
 
   const toggleImage = (index) => {
@@ -69,17 +73,13 @@ const Product = () => {
 
   const addProductToCart = () => {
     if (quantity <= 0) return;
-    dispatch(addItemToCart(cartItems, SHOP_DATA[0], quantity));
+    dispatch(addItemToCart(cartItems, product, quantity));
     setQuantity(0);
   };
 
   useEffect(() => {
     dispatch(getProduct(id));
   }, [dispatch, id]);
-
-  const product = useSelector(selectProduct);
-  const isLoading = useSelector(selectIsLoading);
-  const productError = useSelector(selectProductError);
 
   if (productError) {
     if (productError?.response?.status === 404)
